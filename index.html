@@ -3,62 +3,387 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mars Colony | Glassmorphism Edition</title>
-    
+    <title>Mars Colony Project | Lab 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
     <style>
-        /* Arxa fon üçün kosmos mənzərəsi */
-        body {
+        :root {
+            --mars: #c0432a;
+            --mars-light: #e8603d;
+            --amber: #f0a04b;
+            --dark: #0d0b0b;
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --text: #f0ece8;
+            --muted: rgba(240, 236, 232, 0.5);
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: url('https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=2000') no-repeat center center fixed;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #0d0a09;
+            color: var(--text);
             min-height: 100vh;
-            color: #ffffff;
+            overflow-x: hidden;
         }
 
-        /* Glassmorphism Paneli */
-        .glass-container {
-            background: rgba(255, 255, 255, 0.1); /* Yarımşəffaf ağ fon */
-            backdrop-filter: blur(15px);        /* Şüşə effekti verən bulandırma */
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2); /* İncə şüşə kənarı */
+        /* Ambient background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% -10%, rgba(192, 67, 42, 0.25) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 80% 110%, rgba(240, 160, 75, 0.12) 0%, transparent 55%),
+                radial-gradient(ellipse 100% 80% at 50% 50%, #120e0c 0%, #0d0a09 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Subtle star field */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(1px 1px at 15% 12%, rgba(255,255,255,0.4) 0%, transparent 100%),
+                radial-gradient(1px 1px at 42% 8%, rgba(255,255,255,0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 68% 22%, rgba(255,255,255,0.35) 0%, transparent 100%),
+                radial-gradient(1px 1px at 88% 5%, rgba(255,255,255,0.25) 0%, transparent 100%),
+                radial-gradient(1px 1px at 5% 35%, rgba(255,255,255,0.2) 0%, transparent 100%),
+                radial-gradient(1px 1px at 95% 40%, rgba(255,255,255,0.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.15) 0%, transparent 100%),
+                radial-gradient(1px 1px at 75% 70%, rgba(255,255,255,0.2) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+        }
+
+        /* ─── HERO HEADER ─────────────────────────────────── */
+        .hero {
+            position: relative;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 28px;
+            padding: 52px 44px;
+            text-align: center;
+            margin-bottom: 28px;
+            box-shadow:
+                0 2px 0 rgba(255,255,255,0.07) inset,
+                0 24px 60px rgba(0,0,0,0.5),
+                0 0 0 1px rgba(192,67,42,0.1);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 120px;
+            background: radial-gradient(ellipse, rgba(192, 67, 42, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-label {
+            display: inline-block;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--amber);
+            background: rgba(240, 160, 75, 0.1);
+            border: 1px solid rgba(240, 160, 75, 0.2);
+            border-radius: 100px;
+            padding: 4px 14px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 7vw, 3.2rem);
+            font-weight: 300;
+            line-height: 1.1;
+            color: #f5ede8;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--mars-light);
+        }
+
+        .hero p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+
+        /* ─── GLASS CARD ──────────────────────────────────── */
+        .card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
-            padding: 40px;
-            max-width: 550px;
-            width: 90%;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            margin: 20px;
+            padding: 32px 32px;
+            margin-bottom: 20px;
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.06) inset,
+                0 16px 40px rgba(0,0,0,0.35);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        h1 {
-            color: #ffccbc;
-            font-size: 2.2em;
-            margin-top: 0;
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.14);
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.08) inset,
+                0 20px 50px rgba(0,0,0,0.4);
         }
 
-        h2, h3 {
-            color: #ffab91;
+        .card h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--amber);
+            margin-bottom: 14px;
+            letter-spacing: -0.01em;
         }
 
-        p {
-            font-size: 1.1em;
-            line-height: 1.6;
+        .card h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--mars-light);
+            margin: 24px 0 12px;
         }
 
+        .card p {
+            font-size: 0.9rem;
+            line-height: 1.75;
+            color: rgba(240, 236, 232, 0.72);
+            font-weight: 300;
+        }
+
+        .highlight {
+            color: #f5ede8;
+            font-weight: 500;
+        }
+
+        /* ─── LIST ────────────────────────────────────────── */
         ul {
-            padding-left: 20px;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        li {
-            margin-bottom: 10px;
+        ul li {
+            font-size: 0.875rem;
+            color: rgba(240, 236, 232, 0.68);
+            font-weight: 300;
+            padding: 10px 14px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        img {
+        ul li::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--mars-light);
+            flex-shrink: 0;
+        }
+
+        /* ─── IMAGE ───────────────────────────────────────── */
+        .img-wrap {
+            border-radius: 14px;
+            overflow: hidden;
+            margin: 20px 0 0;
+            border: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .img-wrap img {
             width: 100%;
-            border-radius: 15px;
-            margin: 20px 0;
-            border: 1px solid rgba(255, 255, 255,
+            height: auto;
+            display: block;
+            margin: 0;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        /* ─── CTA BUTTON ──────────────────────────────────── */
+        .cta-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 18px;
+            padding: 11px 22px;
+            background: linear-gradient(135deg, var(--mars) 0%, var(--mars-light) 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            box-shadow: 0 4px 20px rgba(192,67,42,0.4);
+            transition: box-shadow 0.25s ease, transform 0.2s ease;
+        }
+
+        .cta-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 28px rgba(192,67,42,0.55);
+        }
+
+        .cta-link svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ─── DIVIDER ─────────────────────────────────────── */
+        .divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            margin: 8px 0 20px;
+        }
+
+        /* ─── FOOTER ──────────────────────────────────────── */
+        footer {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 16px;
+            padding: 24px 28px;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        footer p {
+            font-size: 0.78rem;
+            color: rgba(240, 236, 232, 0.35);
+            font-weight: 300;
+            line-height: 1.9;
+        }
+
+        .linkedin-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(240, 236, 232, 0.65);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+            transition: all 0.25s ease;
+            margin-top: 6px;
+        }
+
+        .linkedin-link:hover {
+            color: #fff;
+            border-color: rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.06);
+        }
+
+        .linkedin-link svg {
+            width: 13px;
+            height: 13px;
+            fill: currentColor;
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding: 36px 24px; }
+            .card { padding: 24px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+
+        <!-- ── HERO HEADER ── -->
+        <header class="hero">
+            <div class="hero-label">Ares-1 Mission · Lab 1</div>
+            <h1>Mars Colony<br><em>The Red Frontier</em></h1>
+            <p>Official portal of the first human settlement on Mars.</p>
+        </header>
+
+        <!-- ── MISSION OVERVIEW ── -->
+        <section class="card">
+            <h2>Mission Overview</h2>
+            <p>
+                The <span class="highlight">Ares-1 Mission</span> aims to establish a sustainable human presence on Mars.
+                Our primary goal is to build a <span class="highlight">self-sufficient ecosystem</span> that can support life
+                independently from Earth.
+            </p>
+
+            <h3>Essential Life Support</h3>
+            <ul>
+                <li>Oxygen Generation System (MOXIE)</li>
+                <li>Advanced Solar Array Grid</li>
+                <li>Subsurface Ice Mining & Water Extraction</li>
+            </ul>
+        </section>
+
+        <!-- ── BASE ARCHITECTURE ── -->
+        <section class="card">
+            <h2>Base Architecture</h2>
+            <p>Modular habitats designed for extreme environments — radiation-shielded, pressure-stable, and expandable.</p>
+            <div class="img-wrap">
+                <img src="mars_base.jpg" alt="Mars Colony Base Concept">
+            </div>
+        </section>
+
+        <!-- ── NASA LINK ── -->
+        <section class="card">
+            <h2>Further Reading</h2>
+            <p>For more information on Mars exploration, visit the official NASA Mars portal.</p>
+            <a href="https://mars.nasa.gov/" target="_blank" class="cta-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                Explore NASA Mars
+            </a>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ── FOOTER ── -->
+        <footer>
+            <p>Prepared by a student of<br><strong style="color:rgba(240,236,232,0.6); font-weight:500;">Mingachevir State University</strong></p>
+            <a href="https://www.linkedin.com/in/your-profile" target="_blank" class="linkedin-link">
+                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                Connect on LinkedIn
+            </a>
+            <p style="margin-top:14px;">&copy; 2026 Web Programming Laboratory Assignment</p>
+        </footer>
+
+    </div>
+</body>
+</html>
