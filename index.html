@@ -2,9 +2,51 @@
 <html lang="az">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mars Koloniyası - Lab 1</title>
+    
+    <style>
+        /* Minimalist Dizayn üçün CSS */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px; /* Saytın enini məhdudlaşdırır */
+            margin: 0 auto;   /* Ortaya gətirir */
+            padding: 20px;    /* Kənarlardan boşluq verir */
+            background-color: #f9f9f9;
+        }
+
+        h1, h2, h3 {
+            color: #d35400; /* Mars rəngi (narıncı-qırmızı) */
+        }
+
+        img {
+            max-width: 100%; /* Şəklin telefondan kənara çıxmaması üçün */
+            height: auto;
+            border-radius: 8px; /* Kənarlarını yuvarlaq edir */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Hafif kölgə */
+        }
+
+        a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #ddd;
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
+
     <h1>Mars: Qırmızı Planetdə Həyat</h1>
     <p><i>Veb səhifəmə xoş gəlmisiniz!</i></p>
     <hr>
@@ -19,11 +61,14 @@
     </ul>
 
     <h3>Media və Resurslar</h3>
-    <img src="mars_base.jpg" alt="Mars Bazası" width="400">
-    <br>
+    <img src="mars_base.jpg" alt="Mars Bazası">
+    <br><br>
     <a href="https://mars.nasa.gov/" target="_blank">NASA Mars saytına keçid</a>
 
     <hr>
-    <p>Hazırladı: <b>MDU Tələbəsi</b></p>
+    <p style="text-align: center; font-size: 0.9em; color: #777;">
+        Hazırladı: <b>MDU Tələbəsi</b>
+    </p>
+
 </body>
 </html>
