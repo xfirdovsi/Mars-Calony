@@ -1,493 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪐</text></svg>">
-    <title>Mars Colony Project</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --mars: #c0432a;
-            --mars-light: #e8603d;
-            --amber: #f0a04b;
-            --text: #f0ece8;
-            --muted: rgba(240,236,232,0.5);
-        }
-        * { margin:0; padding:0; box-sizing:border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪐</text></svg>">
+<title>Mars Colony Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --mars:#c0432a; --mars-light:#e8603d; --amber:#f0a04b;
+    --text:#f0ece8; --muted:rgba(240,236,232,.5);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: #0d0a09;
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+body{font-family:'DM Sans',sans-serif;background:#0d0a09;color:var(--text);min-height:100vh;overflow-x:hidden;}
 
-        body::before {
-            content:'';
-            position:fixed; inset:0;
-            background:
-                radial-gradient(ellipse 80% 50% at 20% -10%, rgba(192,67,42,.25) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 40% at 80% 110%, rgba(240,160,75,.12) 0%, transparent 55%),
-                radial-gradient(ellipse 100% 80% at 50% 50%, #120e0c 0%, #0d0a09 100%);
-            pointer-events:none; z-index:0;
-        }
-        body::after {
-            content:'';
-            position:fixed; inset:0;
-            background-image:
-                radial-gradient(1px 1px at 15% 12%, rgba(255,255,255,.4) 0%, transparent 100%),
-                radial-gradient(1px 1px at 42% 8%,  rgba(255,255,255,.3) 0%, transparent 100%),
-                radial-gradient(1px 1px at 68% 22%, rgba(255,255,255,.35) 0%, transparent 100%),
-                radial-gradient(1px 1px at 88% 5%,  rgba(255,255,255,.25) 0%, transparent 100%),
-                radial-gradient(1px 1px at 5%  35%, rgba(255,255,255,.2)  0%, transparent 100%),
-                radial-gradient(1px 1px at 95% 40%, rgba(255,255,255,.3)  0%, transparent 100%),
-                radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,.15) 0%, transparent 100%),
-                radial-gradient(1px 1px at 75% 70%, rgba(255,255,255,.2)  0%, transparent 100%);
-            pointer-events:none; z-index:0;
-        }
+body::before{content:'';position:fixed;inset:0;
+    background:radial-gradient(ellipse 80% 50% at 20% -10%,rgba(192,67,42,.25) 0%,transparent 60%),
+               radial-gradient(ellipse 60% 40% at 80% 110%,rgba(240,160,75,.12) 0%,transparent 55%),
+               radial-gradient(ellipse 100% 80% at 50% 50%,#120e0c 0%,#0d0a09 100%);
+    pointer-events:none;z-index:0;}
 
-        .wrapper {
-            position:relative; z-index:1;
-            max-width:680px; margin:0 auto;
-            padding:40px 24px 60px;
-        }
+body::after{content:'';position:fixed;inset:0;
+    background-image:radial-gradient(1px 1px at 15% 12%,rgba(255,255,255,.4) 0%,transparent 100%),
+                     radial-gradient(1px 1px at 42% 8%,rgba(255,255,255,.3) 0%,transparent 100%),
+                     radial-gradient(1px 1px at 68% 22%,rgba(255,255,255,.35) 0%,transparent 100%),
+                     radial-gradient(1px 1px at 88% 5%,rgba(255,255,255,.25) 0%,transparent 100%),
+                     radial-gradient(1px 1px at 5% 35%,rgba(255,255,255,.2) 0%,transparent 100%),
+                     radial-gradient(1px 1px at 95% 40%,rgba(255,255,255,.3) 0%,transparent 100%),
+                     radial-gradient(1px 1px at 30% 60%,rgba(255,255,255,.15) 0%,transparent 100%),
+                     radial-gradient(1px 1px at 75% 70%,rgba(255,255,255,.2) 0%,transparent 100%);
+    pointer-events:none;z-index:0;}
 
-        /* ── HERO ── */
-        .hero {
-            position:relative;
-            background:rgba(255,255,255,.04);
-            backdrop-filter:blur(24px);
-            border:1px solid rgba(255,255,255,.09);
-            border-radius:28px;
-            padding:52px 44px;
-            text-align:center;
-            margin-bottom:24px;
-            box-shadow: 0 2px 0 rgba(255,255,255,.07) inset, 0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(192,67,42,.1);
-            overflow:hidden;
-        }
-        .hero::before {
-            content:'';
-            position:absolute; top:-60px; left:50%;
-            transform:translateX(-50%);
-            width:300px; height:120px;
-            background:radial-gradient(ellipse, rgba(192,67,42,.3) 0%, transparent 70%);
-            pointer-events:none;
-        }
-        .hero-label {
-            display:inline-block;
-            font-size:.65rem; font-weight:500;
-            letter-spacing:.18em; text-transform:uppercase;
-            color:var(--amber);
-            background:rgba(240,160,75,.1);
-            border:1px solid rgba(240,160,75,.2);
-            border-radius:100px;
-            padding:4px 14px; margin-bottom:20px;
-        }
-        .hero h1 {
-            font-family:'Cormorant Garamond', serif;
-            font-size:clamp(2.2rem,7vw,3.2rem);
-            font-weight:300; line-height:1.1;
-            color:#f5ede8; letter-spacing:-.02em;
-            margin-bottom:12px;
-        }
-        .hero h1 em { font-style:italic; color:var(--mars-light); }
-        .hero p { font-size:.9rem; color:var(--muted); font-weight:300; letter-spacing:.02em; }
+.wrapper{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:40px 24px 60px;}
 
-        /* ── CARD ── */
-        .card {
-            background:rgba(255,255,255,.04);
-            backdrop-filter:blur(20px);
-            border:1px solid rgba(255,255,255,.08);
-            border-radius:20px;
-            padding:32px;
-            margin-bottom:20px;
-            box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 16px 40px rgba(0,0,0,.35);
-            transition:border-color .3s ease, box-shadow .3s ease;
-        }
-        .card:hover {
-            border-color:rgba(255,255,255,.14);
-            box-shadow:0 1px 0 rgba(255,255,255,.08) inset, 0 20px 50px rgba(0,0,0,.4);
-        }
-        .card h2 {
-            font-family:'Cormorant Garamond', serif;
-            font-size:1.5rem; font-weight:400;
-            color:var(--amber); margin-bottom:14px;
-            letter-spacing:-.01em;
-        }
-        .card h3 {
-            font-size:.75rem; font-weight:500;
-            letter-spacing:.12em; text-transform:uppercase;
-            color:var(--mars-light);
-            margin:24px 0 14px;
-        }
-        .card > p, .card > .card-desc {
-            font-size:.9rem; line-height:1.75;
-            color:rgba(240,236,232,.72); font-weight:300;
-        }
-        .highlight { color:#f5ede8; font-weight:500; }
+/* HERO */
+.hero{position:relative;background:rgba(255,255,255,.04);backdrop-filter:blur(24px);
+    border:1px solid rgba(255,255,255,.09);border-radius:28px;padding:52px 44px;
+    text-align:center;margin-bottom:24px;overflow:hidden;
+    box-shadow:0 2px 0 rgba(255,255,255,.07) inset,0 24px 60px rgba(0,0,0,.5),0 0 0 1px rgba(192,67,42,.1);}
+.hero::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);
+    width:300px;height:120px;background:radial-gradient(ellipse,rgba(192,67,42,.3) 0%,transparent 70%);pointer-events:none;}
+.hero-label{display:inline-block;font-size:.65rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--amber);background:rgba(240,160,75,.1);border:1px solid rgba(240,160,75,.2);
+    border-radius:100px;padding:4px 14px;margin-bottom:20px;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,7vw,3.2rem);font-weight:300;
+    line-height:1.1;color:#f5ede8;letter-spacing:-.02em;margin-bottom:12px;}
+.hero h1 em{font-style:italic;color:var(--mars-light);}
+.hero p{font-size:.9rem;color:var(--muted);font-weight:300;letter-spacing:.02em;}
 
-        /* ── ACCORDION ── */
-        .accordion-list { display:flex; flex-direction:column; gap:8px; }
-        .acc-item {
-            background:rgba(255,255,255,.028);
-            border:1px solid rgba(255,255,255,.07);
-            border-radius:13px; overflow:hidden;
-            transition: background .4s ease, border-color .4s ease, box-shadow .4s ease;
-        }
-        .acc-item.open {
-            background:rgba(255,255,255,.055);
-            border-color:rgba(232,96,61,.28);
-            box-shadow: 0 0 0 1px rgba(232,96,61,.08), 0 8px 32px rgba(192,67,42,.18), 0 1px 0 rgba(255,255,255,.07) inset;
-        }
-        .acc-trigger {
-            width:100%; background:none; border:none; cursor:pointer;
-            padding:14px 16px; display:flex; align-items:center; gap:12px;
-            text-align:left; transition:background .2s ease;
-        }
-        .acc-trigger:hover { background:rgba(255,255,255,.025); }
-        .acc-dot {
-            width:6px; height:6px; border-radius:50%;
-            background:var(--mars-light); flex-shrink:0;
-            transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s ease;
-        }
-        .acc-item.open .acc-dot { transform:scale(1.6); box-shadow:0 0 10px rgba(232,96,61,.8); }
-        .acc-label {
-            flex:1; font-size:.875rem; color:rgba(240,236,232,.7); font-weight:300;
-            transition:color .3s ease, font-weight .3s ease;
-        }
-        .acc-item.open .acc-label { color:#f5ede8; font-weight:400; }
-        .acc-chevron {
-            width:15px; height:15px; stroke:rgba(240,236,232,.35); fill:none;
-            stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0;
-            transition: transform .45s cubic-bezier(.34,1.2,.64,1), stroke .3s ease;
-        }
-        .acc-item.open .acc-chevron { transform:rotate(180deg); stroke:var(--mars-light); }
-        .acc-body {
-            display:grid; grid-template-rows:0fr;
-            transition:grid-template-rows .45s cubic-bezier(.4,0,.2,1);
-        }
-        .acc-item.open .acc-body { grid-template-rows:1fr; }
-        .acc-inner { overflow:hidden; }
-        .acc-text {
-            padding:14px 20px 20px 34px;
-            font-size:.84rem; line-height:1.9;
-            color:rgba(240,236,232,.58); font-weight:300;
-            border-top:1px solid rgba(255,255,255,.06);
-        }
+/* CARD */
+.card{background:rgba(255,255,255,.04);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;padding:32px;margin-bottom:20px;
+    box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 16px 40px rgba(0,0,0,.35);
+    transition:border-color .3s,box-shadow .3s;}
+.card:hover{border-color:rgba(255,255,255,.14);box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 20px 50px rgba(0,0,0,.4);}
+.card h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;
+    color:var(--amber);margin-bottom:14px;letter-spacing:-.01em;}
+.card h3{font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--mars-light);margin:24px 0 14px;}
+.card>p,.card-desc{font-size:.9rem;line-height:1.75;color:rgba(240,236,232,.72);font-weight:300;}
+.highlight{color:#f5ede8;font-weight:500;}
 
-        /* ══════════════════════════════════════════
-           3 PANEL CARDS — şəkildən yuxarı
-        ══════════════════════════════════════════ */
-        .panels-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-            margin: 22px 0 20px;
-        }
+/* MAIN ACCORDION */
+.accordion-list{display:flex;flex-direction:column;gap:8px;}
+.acc-item{background:rgba(255,255,255,.028);border:1px solid rgba(255,255,255,.07);border-radius:13px;overflow:hidden;
+    transition:background .4s,border-color .4s,box-shadow .4s;}
+.acc-item.open{background:rgba(255,255,255,.055);border-color:rgba(232,96,61,.28);
+    box-shadow:0 0 0 1px rgba(232,96,61,.08),0 8px 32px rgba(192,67,42,.18),0 1px 0 rgba(255,255,255,.07) inset;}
+.acc-trigger{width:100%;background:none;border:none;cursor:pointer;padding:14px 16px;
+    display:flex;align-items:center;gap:12px;text-align:left;transition:background .2s;}
+.acc-trigger:hover{background:rgba(255,255,255,.025);}
+.acc-dot{width:6px;height:6px;border-radius:50%;background:var(--mars-light);flex-shrink:0;
+    transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .4s;}
+.acc-item.open .acc-dot{transform:scale(1.6);box-shadow:0 0 10px rgba(232,96,61,.8);}
+.acc-label{flex:1;font-size:.875rem;color:rgba(240,236,232,.7);font-weight:300;transition:color .3s,font-weight .3s;}
+.acc-item.open .acc-label{color:#f5ede8;font-weight:400;}
+.acc-chevron{width:15px;height:15px;stroke:rgba(240,236,232,.35);fill:none;stroke-width:2.5;
+    stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;transition:transform .45s cubic-bezier(.34,1.2,.64,1),stroke .3s;}
+.acc-item.open .acc-chevron{transform:rotate(180deg);stroke:var(--mars-light);}
+.acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.4,0,.2,1);}
+.acc-item.open .acc-body{grid-template-rows:1fr;}
+.acc-inner{overflow:hidden;}
+.acc-text{padding:14px 20px 20px 34px;font-size:.84rem;line-height:1.9;
+    color:rgba(240,236,232,.58);font-weight:300;border-top:1px solid rgba(255,255,255,.06);}
 
-        .panel-card {
-            position: relative;
-            border-radius: 18px;
-            padding: 24px 18px 22px;
-            cursor: pointer;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,.09);
-            transition:
-                transform .35s cubic-bezier(.34,1.4,.64,1),
-                box-shadow .35s ease,
-                border-color .3s ease;
-            /* Dizayna uyğun tünd şəffaf fon */
-            background: rgba(255,255,255,.045);
-            backdrop-filter: blur(18px);
-        }
+/* 3 PANEL CARDS */
+.panels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 20px;}
+.panel-card{position:relative;border-radius:18px;padding:24px 18px 44px;cursor:pointer;overflow:hidden;
+    border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.045);backdrop-filter:blur(18px);
+    transition:transform .35s cubic-bezier(.34,1.4,.64,1),box-shadow .35s,border-color .3s;}
+.panel-card::before{content:'';position:absolute;top:0;left:16px;right:16px;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);}
+.panel-card::after{content:'';position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);
+    width:80%;height:60px;border-radius:50%;
+    background:radial-gradient(ellipse,rgba(192,67,42,.35) 0%,transparent 70%);
+    transition:opacity .4s,bottom .35s;opacity:0;}
+.panel-card:hover{transform:translateY(-5px) scale(1.02);border-color:rgba(232,96,61,.35);
+    box-shadow:0 0 0 1px rgba(232,96,61,.12),0 16px 40px rgba(192,67,42,.25),0 2px 0 rgba(255,255,255,.1) inset;}
+.panel-card:hover::after{opacity:1;bottom:-10px;}
+.panel-card:active{transform:translateY(-2px) scale(1.005);}
+.panel-number{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;
+    color:rgba(240,160,75,.2);line-height:1;margin-bottom:12px;letter-spacing:-.02em;}
+.panel-title{font-size:.62rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--mars-light);margin-bottom:10px;}
+.panel-preview{font-size:.78rem;line-height:1.7;color:rgba(240,236,232,.38);font-weight:300;font-style:italic;}
+.panel-arrow{position:absolute;bottom:16px;right:16px;width:26px;height:26px;border-radius:50%;
+    background:rgba(192,67,42,.2);border:1px solid rgba(232,96,61,.25);
+    display:flex;align-items:center;justify-content:center;
+    transition:background .3s,transform .3s cubic-bezier(.34,1.4,.64,1);}
+.panel-arrow svg{width:11px;height:11px;stroke:rgba(232,96,61,.8);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.panel-card:hover .panel-arrow{background:rgba(192,67,42,.45);transform:scale(1.15);}
+.panel-card:hover .panel-arrow svg{stroke:#fff;}
 
-        /* Üst parıltı xətti */
-        .panel-card::before {
-            content: '';
-            position: absolute; top: 0; left: 16px; right: 16px; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
-            transition: opacity .3s ease;
-        }
+/* IMAGE */
+.img-wrap{border-radius:14px;overflow:hidden;margin:0;border:1px solid rgba(255,255,255,.07);}
+.img-wrap img{width:100%;height:auto;display:block;}
 
-        /* Mars qızılı alt glow */
-        .panel-card::after {
-            content: '';
-            position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%);
-            width: 80%; height: 60px;
-            border-radius: 50%;
-            background: radial-gradient(ellipse, rgba(192,67,42,.35) 0%, transparent 70%);
-            transition: opacity .4s ease, bottom .35s ease;
-            opacity: 0;
-        }
+/* CTA */
+.cta-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:11px 22px;
+    background:linear-gradient(135deg,var(--mars) 0%,var(--mars-light) 100%);
+    color:#fff;text-decoration:none;border-radius:100px;font-size:.82rem;font-weight:500;
+    letter-spacing:.04em;box-shadow:0 4px 20px rgba(192,67,42,.4);transition:box-shadow .25s,transform .2s;}
+.cta-link:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(192,67,42,.55);}
+.cta-link svg{width:14px;height:14px;}
 
-        /* Hover — yumşaq titrəyiş effekti */
-        .panel-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            border-color: rgba(232,96,61,.35);
-            box-shadow:
-                0 0 0 1px rgba(232,96,61,.12),
-                0 16px 40px rgba(192,67,42,.25),
-                0 2px 0 rgba(255,255,255,.1) inset;
-        }
-        .panel-card:hover::after {
-            opacity: 1;
-            bottom: -10px;
-        }
+.divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:8px 0 20px;}
 
-        /* Klik animasiyası */
-        .panel-card:active {
-            transform: translateY(-2px) scale(1.005);
-        }
+/* FOOTER */
+footer{background:rgba(255,255,255,.03);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.07);
+    border-radius:16px;padding:24px 28px;text-align:center;}
+footer p{font-size:.78rem;color:rgba(240,236,232,.35);font-weight:300;line-height:1.9;}
+.linkedin-link{display:inline-flex;align-items:center;gap:6px;color:rgba(240,236,232,.65);
+    text-decoration:none;font-size:.8rem;padding:5px 14px;border:1px solid rgba(255,255,255,.1);
+    border-radius:100px;transition:all .25s;margin-top:8px;}
+.linkedin-link:hover{color:#fff;border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06);}
+.linkedin-link svg{width:13px;height:13px;fill:currentColor;}
 
-        /* Panel nömrəsi — dekorativ */
-        .panel-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 300;
-            color: rgba(240,160,75,.2);
-            line-height: 1;
-            margin-bottom: 12px;
-            letter-spacing: -.02em;
-        }
+/* ═══════════════════════════════════════
+   DETAIL PAGE
+═══════════════════════════════════════ */
+.detail-page{display:none;position:fixed;inset:0;z-index:100;background:#0d0a09;overflow-y:auto;
+    animation:pgIn .38s cubic-bezier(.4,0,.2,1);}
+.detail-page.active{display:block;}
+@keyframes pgIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
 
-        .panel-title {
-            font-size: .62rem;
-            font-weight: 500;
-            letter-spacing: .15em;
-            text-transform: uppercase;
-            color: var(--mars-light);
-            margin-bottom: 10px;
-        }
+.detail-page::before{content:'';position:fixed;inset:0;
+    background:radial-gradient(ellipse 70% 40% at 70% -5%,rgba(192,67,42,.2) 0%,transparent 55%),
+               radial-gradient(ellipse 100% 80% at 50% 50%,#120e0c 0%,#0d0a09 100%);pointer-events:none;}
+.detail-page::after{content:'';position:fixed;inset:0;
+    background-image:radial-gradient(1px 1px at 22% 8%,rgba(255,255,255,.4) 0%,transparent 100%),
+                     radial-gradient(1px 1px at 58% 15%,rgba(255,255,255,.3) 0%,transparent 100%),
+                     radial-gradient(1px 1px at 80% 4%,rgba(255,255,255,.35) 0%,transparent 100%),
+                     radial-gradient(1px 1px at 10% 28%,rgba(255,255,255,.2) 0%,transparent 100%),
+                     radial-gradient(1px 1px at 93% 35%,rgba(255,255,255,.25) 0%,transparent 100%);pointer-events:none;}
 
-        .panel-preview {
-            font-size: .78rem;
-            line-height: 1.7;
-            color: rgba(240,236,232,.38);
-            font-weight: 300;
-            font-style: italic;
-        }
+.detail-inner{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:40px 24px 60px;}
 
-        /* "Oxu" arrow */
-        .panel-arrow {
-            position: absolute; bottom: 16px; right: 16px;
-            width: 26px; height: 26px;
-            border-radius: 50%;
-            background: rgba(192,67,42,.2);
-            border: 1px solid rgba(232,96,61,.25);
-            display: flex; align-items: center; justify-content: center;
-            transition: background .3s ease, transform .3s cubic-bezier(.34,1.4,.64,1);
-        }
-        .panel-arrow svg {
-            width: 11px; height: 11px;
-            stroke: rgba(232,96,61,.8); fill: none;
-            stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
-            transition: stroke .3s ease;
-        }
-        .panel-card:hover .panel-arrow {
-            background: rgba(192,67,42,.45);
-            transform: scale(1.15);
-        }
-        .panel-card:hover .panel-arrow svg {
-            stroke: #fff;
-        }
-        /* ══════════════════════════════════════════ */
+.detail-back{display:inline-flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;
+    color:rgba(240,236,232,.5);font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:400;
+    letter-spacing:.04em;padding:8px 0;margin-bottom:32px;transition:color .25s;}
+.detail-back:hover{color:var(--text);}
+.detail-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
 
-        /* ── IMAGE ── */
-        .img-wrap {
-            border-radius:14px; overflow:hidden;
-            margin: 0;
-            border:1px solid rgba(255,255,255,.07);
-        }
-        .img-wrap img { width:100%; height:auto; display:block; }
+.detail-label{display:inline-block;font-size:.62rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--amber);background:rgba(240,160,75,.1);border:1px solid rgba(240,160,75,.2);
+    border-radius:100px;padding:4px 12px;margin-bottom:16px;}
+.detail-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,6vw,2.6rem);font-weight:300;
+    line-height:1.15;color:#f5ede8;letter-spacing:-.02em;margin-bottom:10px;}
+.detail-subtitle{font-size:.88rem;color:rgba(240,236,232,.45);font-weight:300;font-style:italic;}
+.detail-divider{border:none;border-top:1px solid rgba(255,255,255,.07);margin:28px 0;}
 
-        /* ── CTA ── */
-        .cta-link {
-            display:inline-flex; align-items:center; gap:8px;
-            margin-top:18px; padding:11px 22px;
-            background:linear-gradient(135deg,var(--mars) 0%,var(--mars-light) 100%);
-            color:#fff; text-decoration:none; border-radius:100px;
-            font-size:.82rem; font-weight:500; letter-spacing:.04em;
-            box-shadow:0 4px 20px rgba(192,67,42,.4);
-            transition:box-shadow .25s ease, transform .2s ease;
-        }
-        .cta-link:hover { transform:translateY(-1px); box-shadow:0 8px 28px rgba(192,67,42,.55); }
-        .cta-link svg { width:14px; height:14px; }
+/* ═══════════════════════════════════════
+   8 BÖLMƏ — GLASS ACCORDION
+   ───────────────────────────────────────
+   MƏLUMAT ƏLAVƏ ETMƏK ÜÇÜN:
+   Aşağıdakı SECTIONS_DATA massivini tapın.
+   Hər bölmənin "content" sahəsinə mətn yazın.
+   Başlığı "title" ilə dəyişin.
+═══════════════════════════════════════ */
+.sec-list{display:flex;flex-direction:column;gap:10px;}
 
-        .divider { border:none; border-top:1px solid rgba(255,255,255,.06); margin:8px 0 20px; }
+.sec-item{
+    background:rgba(255,255,255,.042);
+    backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;overflow:hidden;
+    transition:transform .32s cubic-bezier(.34,1.4,.64,1),background .3s,border-color .3s,box-shadow .3s;
+}
 
-        /* ── FOOTER ── */
-        footer {
-            background:rgba(255,255,255,.03);
-            backdrop-filter:blur(20px);
-            border:1px solid rgba(255,255,255,.07);
-            border-radius:16px; padding:24px 28px; text-align:center;
-        }
-        footer p { font-size:.78rem; color:rgba(240,236,232,.35); font-weight:300; line-height:1.9; }
-        .linkedin-link {
-            display:inline-flex; align-items:center; gap:6px;
-            color:rgba(240,236,232,.65); text-decoration:none;
-            font-size:.8rem; font-weight:400;
-            padding:5px 14px;
-            border:1px solid rgba(255,255,255,.1); border-radius:100px;
-            transition:all .25s ease; margin-top:8px;
-        }
-        .linkedin-link:hover { color:#fff; border-color:rgba(255,255,255,.25); background:rgba(255,255,255,.06); }
-        .linkedin-link svg { width:13px; height:13px; fill:currentColor; }
+/* hover titrəyiş — yalnız bağlı halda */
+.sec-item:not(.open):hover{
+    transform:translateY(-3px) scale(1.008);
+    background:rgba(255,255,255,.065);
+    border-color:rgba(232,96,61,.2);
+    box-shadow:0 8px 28px rgba(192,67,42,.14),0 1px 0 rgba(255,255,255,.09) inset;
+}
 
-        /* ══════════════════════════════════════════
-           DETAIL PAGE — panel tıklandıqda açılır
-        ══════════════════════════════════════════ */
-        .detail-page {
-            display: none;
-            position: fixed; inset: 0; z-index: 100;
-            background: #0d0a09;
-            overflow-y: auto;
-            animation: pageIn .4s cubic-bezier(.4,0,.2,1);
-        }
-        .detail-page.active { display: block; }
+/* açıq hal */
+.sec-item.open{
+    background:rgba(255,255,255,.07);
+    border-color:rgba(232,96,61,.28);
+    box-shadow:0 0 0 1px rgba(232,96,61,.08),0 12px 36px rgba(192,67,42,.18),0 1px 0 rgba(255,255,255,.1) inset;
+}
 
-        @keyframes pageIn {
-            from { opacity: 0; transform: translateY(24px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+/* başlıq düyməsi */
+.sec-btn{width:100%;background:none;border:none;cursor:pointer;
+    padding:17px 20px;display:flex;align-items:center;gap:14px;text-align:left;}
 
-        /* Stars bg on detail page */
-        .detail-page::before {
-            content:'';
-            position:fixed; inset:0;
-            background:
-                radial-gradient(ellipse 70% 40% at 70% -5%, rgba(192,67,42,.2) 0%, transparent 55%),
-                radial-gradient(ellipse 100% 80% at 50% 50%, #120e0c 0%, #0d0a09 100%);
-            pointer-events:none;
-        }
-        .detail-page::after {
-            content:'';
-            position:fixed; inset:0;
-            background-image:
-                radial-gradient(1px 1px at 22% 8%,  rgba(255,255,255,.4) 0%, transparent 100%),
-                radial-gradient(1px 1px at 58% 15%, rgba(255,255,255,.3) 0%, transparent 100%),
-                radial-gradient(1px 1px at 80% 4%,  rgba(255,255,255,.35) 0%, transparent 100%),
-                radial-gradient(1px 1px at 10% 28%, rgba(255,255,255,.2) 0%, transparent 100%),
-                radial-gradient(1px 1px at 93% 35%, rgba(255,255,255,.25) 0%, transparent 100%);
-            pointer-events:none;
-        }
+/* nömrə */
+.sec-num{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;
+    color:rgba(240,160,75,.3);min-width:26px;transition:color .3s;user-select:none;}
+.sec-item.open .sec-num{color:rgba(240,160,75,.75);}
 
-        .detail-inner {
-            position: relative; z-index: 1;
-            max-width: 680px; margin: 0 auto;
-            padding: 40px 24px 60px;
-        }
+/* başlıq mətni */
+.sec-name{flex:1;font-size:.9rem;font-weight:400;color:rgba(240,236,232,.62);
+    letter-spacing:.015em;transition:color .3s;text-align:left;}
+.sec-item.open .sec-name{color:#f5ede8;}
 
-        .detail-back {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: none; border: none; cursor: pointer;
-            color: rgba(240,236,232,.5);
-            font-family: 'DM Sans', sans-serif;
-            font-size: .8rem; font-weight: 400;
-            letter-spacing: .04em;
-            padding: 8px 0;
-            margin-bottom: 32px;
-            transition: color .25s ease;
-        }
-        .detail-back:hover { color: var(--text); }
-        .detail-back svg {
-            width: 14px; height: 14px;
-            stroke: currentColor; fill: none;
-            stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
-        }
+/* rəngli nöqtə: məlumat varsa parlayır, yoxdursa solğun */
+.sec-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+    transition:background .35s,box-shadow .35s,transform .4s cubic-bezier(.34,1.56,.64,1);}
+.sec-item.has-data .sec-dot{background:var(--mars-light);border-color:transparent;}
+.sec-item.open .sec-dot{transform:scale(1.55);box-shadow:0 0 10px rgba(232,96,61,.9);}
 
-        .detail-header {
-            margin-bottom: 32px;
-        }
-        .detail-label {
-            display: inline-block;
-            font-size: .62rem; font-weight: 500;
-            letter-spacing: .16em; text-transform: uppercase;
-            color: var(--amber);
-            background: rgba(240,160,75,.1);
-            border: 1px solid rgba(240,160,75,.2);
-            border-radius: 100px;
-            padding: 4px 12px; margin-bottom: 16px;
-        }
-        .detail-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.8rem, 6vw, 2.6rem);
-            font-weight: 300; line-height: 1.15;
-            color: #f5ede8; letter-spacing: -.02em;
-            margin-bottom: 10px;
-        }
-        .detail-subtitle {
-            font-size: .88rem;
-            color: rgba(240,236,232,.45);
-            font-weight: 300; font-style: italic;
-        }
+/* chevron */
+.sec-chev{width:15px;height:15px;stroke:rgba(240,236,232,.28);fill:none;
+    stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;
+    transition:transform .42s cubic-bezier(.34,1.2,.64,1),stroke .3s;}
+.sec-item.open .sec-chev{transform:rotate(180deg);stroke:var(--mars-light);}
 
-        .detail-divider {
-            border: none;
-            border-top: 1px solid rgba(255,255,255,.07);
-            margin: 28px 0;
-        }
+/* smooth açılma */
+.sec-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .44s cubic-bezier(.4,0,.2,1);}
+.sec-item.open .sec-body{grid-template-rows:1fr;}
+.sec-inner{overflow:hidden;}
 
-        /* Content area — bura data əlavə olunacaq */
-        .detail-content {
-            font-size: .9rem;
-            line-height: 1.85;
-            color: rgba(240,236,232,.68);
-            font-weight: 300;
-        }
-        .detail-content.empty {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 220px;
-            text-align: center;
-            color: rgba(240,236,232,.2);
-            font-style: italic;
-            border: 1px dashed rgba(255,255,255,.07);
-            border-radius: 16px;
-            gap: 12px;
-        }
-        .detail-content.empty .empty-icon {
-            font-size: 2rem;
-            opacity: .35;
-        }
-        /* ══════════════════════════════════════════ */
+/* məzmun mətni */
+.sec-text{padding:2px 24px 22px 60px;font-size:.87rem;line-height:1.9;
+    color:rgba(240,236,232,.62);font-weight:300;border-top:1px solid rgba(255,255,255,.06);}
+.sec-text p{margin-bottom:12px;}
+.sec-text p:last-child{margin-bottom:0;}
 
-        @media(max-width:520px){
-            .hero { padding:36px 24px; }
-            .card { padding:24px 20px; }
-            .panels-grid { grid-template-columns: 1fr; }
-            .panel-card { padding: 20px 18px 20px; }
-        }
-    </style>
+/* boş placeholder */
+.sec-empty{padding:14px 24px 20px 60px;font-size:.8rem;font-style:italic;
+    color:rgba(240,236,232,.18);border-top:1px solid rgba(255,255,255,.05);}
+
+@media(max-width:520px){
+    .hero{padding:36px 24px;} .card{padding:24px 20px;}
+    .panels-grid{grid-template-columns:1fr;}
+    .panel-card{padding:20px 18px 44px;}
+    .sec-text{padding:2px 16px 20px 48px;}
+    .sec-empty{padding:12px 16px 18px 48px;}
+}
+</style>
 </head>
 <body>
 
-<!-- ══════════════ MAIN PAGE ══════════════ -->
+<!-- ══════════════ ANA SƏHİFƏ ══════════════ -->
 <div id="main-page">
 <div class="wrapper">
 
-    <!-- HERO -->
     <header class="hero">
         <div class="hero-label">Ares-1 Mission</div>
         <h1>Mars Colony<br><em>The Red Frontier</em></h1>
         <p>Sərhədlərin bitdiyi, gələcəyin başladığı nöqtə.</p>
     </header>
 
-    <!-- MISSION OVERVIEW -->
     <section class="card">
         <h2>Missiyanın İcmalı</h2>
-        <p>
-            <span class="highlight">Ares-1 Mission</span> Marsda insanların davamlı varlığını təmin etməyi hədəfləyir.
-            Bizim əsas məqsədimiz Yerdən asılı olmayaraq həyatı dəstəkləyə bilən <span class="highlight">özünü təmin edən ekosistem</span> qurmaqdır.
-        </p>
+        <p><span class="highlight">Ares-1 Mission</span> Marsda insanların davamlı varlığını təmin etməyi hədəfləyir.
+        Bizim əsas məqsədimiz Yerdən asılı olmayaraq həyatı dəstəkləyə bilən <span class="highlight">özünü təmin edən ekosistem</span> qurmaqdır.</p>
 
         <h3>HƏYAT ÜÇÜN ZƏRURİ TƏMİNAT</h3>
-
         <div class="accordion-list">
+
             <div class="acc-item" id="acc-1">
                 <button class="acc-trigger" onclick="toggleAcc('acc-1')">
                     <span class="acc-dot"></span>
@@ -495,11 +282,7 @@
                     <svg class="acc-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
                 <div class="acc-body"><div class="acc-inner">
-                    <p class="acc-text">
-                        "Ares-1" missiyasının ən strateji texnologiyalarından biri olan MOXIE, qırmızı planetdə insan həyatının davamlılığını təmin edən əsas amildir. Bu sistemin əsas vəzifəsi Marsın yerli resurslarından istifadə edərək birbaşa orada oksigen istehsal etməkdir. Marsın atmosferi Yerdən fərqli olaraq təxminən 96% karbon qazından ibarətdir və MOXIE bu bol xammal ehtiyatını udaraq elektrokimyəvi proses vasitəsilə onu tənəffüs üçün yararlı oksigen molekullarına çevirir. Hazırda hər bir MOXIE bölməsi optimal iş şəraitində saatda 10 qramadək oksigen istehsal etmək gücündədir.
-
-Sistem Marsın sərt mühitində, təxminən 800 °C kimi ekstremal yüksək temperaturlarda fəaliyyət göstərdiyi üçün onun istehsalında xüsusi istiyədavamlı və möhkəm materiallardan istifadə olunmuşdur. Bu texnologiya ilk dəfə NASA-nın "Perseverance" roverində real Mars şəraitində uğurla sınaqdan keçirilmiş və öz effektivliyini tam sübut etmişdir. Oksigen təkcə kolonistlərin tənəffüsü üçün deyil, həm də raket yanacağının əsas tərkib hissəsi kimi həyati önəm daşıyır. Yerli oksigen istehsalı sayəsində geri qayıdış missiyaları üçün lazım olan yanacaq Marsın özündə hazırlana biləcək ki, bu da koloniyanın Yerdən gələn təchizat asılılığını fundamental şəkildə azaldır. Gələcək mərhələlərdə paralel işləyən MOXIE şəbəkələri sayəsində daha böyük heyətlərin bütün oksigen tələbatı tam şəkildə qarşılanacaq və Marsda uzunmüddətli məskunlaşma həqiqi mənada mümkün olacaqdır.
-                    </p>
+                    <p class="acc-text">"Ares-1" missiyasının ən strateji texnologiyalarından biri olan MOXIE, qırmızı planetdə insan həyatının davamlılığını təmin edən əsas amildir. Bu sistemin əsas vəzifəsi Marsın yerli resurslarından istifadə edərək birbaşa orada oksigen istehsal etməkdir. Marsın atmosferi Yerdən fərqli olaraq təxminən 96% karbon qazından ibarətdir və MOXIE bu bol xammal ehtiyatını udaraq elektrokimyəvi proses vasitəsilə onu tənəffüs üçün yararlı oksigen molekullarına çevirir.</p>
                 </div></div>
             </div>
 
@@ -510,11 +293,7 @@ Sistem Marsın sərt mühitində, təxminən 800 °C kimi ekstremal yüksək tem
                     <svg class="acc-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
                 <div class="acc-body"><div class="acc-inner">
-                    <p class="acc-text">
-                        Mars Yer kürəsinə çatan günəş enerjisinin təxminən 43%-ni qəbul edir, buna görə də koloniyanın sağ qalması üçün yüksək səmərəli fotovoltaik panellərin istifadəsi mütləq ehtiyacdır. Bu məqsədlə hazırlanan Təkmilləşdirilmiş Günəş Panelləri Şəbəkəsi, standart kommersiya panelləri ilə müqayisədə işığı daha geniş spektrdə enerjiyə çevirə bilən çoxkeçidli hüceyrələrdən istifadə edir. Enerji qəbulunu maksimuma çatdırmaq üçün hər bir panel massivi 24,6 saatlıq Mars günü boyunca günəşi izləyən motorlu izləmə sistemləri üzərinə quraşdırılmışdır. Marsda günəş enerjisi üçün əsas təhlükə olan toz fırtınaları şiddətli vaxtlarda panellərin məhsuldarlığını 90%-ə qədər azalda bilsin də, buna qarşı hər bir panel səthi insan müdaxiləsi olmadan narın toz hissəciklərini davamlı olaraq itələyən elektrostatik özünü təmizləmə örtüyü ilə təchiz edilmişdir.
-
-Toplanan enerji, fırtına səbəbindən günəş işığı azaldığı təqdirdə koloniyanı 72 saata qədər enerji ilə təmin edə bilən yüksək sıxlıqlı litium-kükürd batareya banklarında saxlanılır. Şəbəkə tamamilə modul quruluşa malikdir, yəni koloniya əhalisi artdıqca və enerji tələbatı yüksəldikcə yeni panellər tədricən sistemə əlavə oluna bilir. Ağıllı paylama şəbəkəsi istehlakı real vaxt rejimində izləyir və enerji çatışmazlığı zamanı resursları avtomatik olaraq kritik həyat təminatı sistemlərinə yönəldir. Soyuq Mars gecələrində isə yeraltı termal saxlama qurğuları günəş şəbəkəsini tamamlayaraq toplanmış enerjini ehtiyaca uyğun olaraq elektrik enerjisinə çevirir və sərbəst buraxır. Bütün şəbəkə 25 illik istismar müddəti üçün layihələndirilmişdir və robotik texniki xidmət bölmələri müntəzəm yoxlamaları və təmir işlərini tamamilə avtonom şəkildə həyata keçirir.
-                    </p>
+                    <p class="acc-text">Mars Yer kürəsinə çatan günəş enerjisinin təxminən 43%-ni qəbul edir. Bu məqsədlə hazırlanan şəbəkə, standart panellərlə müqayisədə işığı daha geniş spektrdə enerjiyə çevirə bilən çoxkeçidli hüceyrələrdən istifadə edir.</p>
                 </div></div>
             </div>
 
@@ -525,76 +304,49 @@ Toplanan enerji, fırtına səbəbindən günəş işığı azaldığı təqdird
                     <svg class="acc-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
                 <div class="acc-body"><div class="acc-inner">
-                    <p class="acc-text">
-                        Marsın səthi altında, xüsusilə "Ares-1" eniş sahəsi üçün seçilmiş orta enlik regionlarında nəhəng su buzu ehtiyatları gizlənir. Səthaltı buz mədənçiliyi prosesi donmuş su yataqlarına çatmaq üçün Mars reqoliti (üst təbəqəsi) altında 10 metrədək dərinliyə nüfuz edən avtonom qazma qurğularının tətbiqini nəzərdə tutur. Çıxarılan buz mərkəzi emal müəssisəsinə daşınır və burada təzyiqli, möhürlənmiş konteynerlər daxilində qızdırılaraq maye suya çevrilir. Daha sonra bu su perchloratları, ağır metalları və potensial bioloji çirkləndiriciləri kənarlaşdıran çoxmərhələli filtrasiya sistemindən keçir. Təmizlənmiş su üç əsas istiqamət üzrə paylanır: içməli və gigiyenik təminat, yaşayış kompleksindəki istixanalar üçün kənd təsərrüfatı suvarılması və hidrogen yanacağı istehsalı.
-
-Bundan əlavə, elektroliz prosesi vasitəsilə su molekulları parçalanaraq əlavə məhsul kimi oksigen istehsal olunur ki, bu da koloniyanın pik tələbat dövrlərində MOXIE sistemini tamamlayır. Bütün qazma qurğuları tamamilə robotlaşdırılmışdır və mərkəzi yaşayış idarəetmə otağından mühəndislər tərəfindən uzaqdan izlənilərək fasiləsiz fəaliyyət göstərir. Su ehtiyatları, temperaturun −80 °C-yə qədər düşə bildiyi Mars gecələrində donmanın qarşısını almaq üçün izolyasiya edilmiş yeraltı çənlərdə saxlanılır. Mars orbitindəki buz xəritəçəkmə peykləri qazma əməliyyatlarını ən zəngin yataqlara yönəltmək üçün davamlı olaraq yenilənən geoloji məlumatlar təqdim edir. Bu qapalı dövriyyəli su idarəetmə sistemi istənilən vaxt koloniya daxilində istifadə olunan suyun 98%-dən çoxunu təkrar emal edərək tullantıların sıfıra yaxın olmasını təmin edir.
-                    </p>
+                    <p class="acc-text">Marsın səthi altında nəhəng su buzu ehtiyatları gizlənir. Avtonom qazma qurğuları 10 metrədək dərinliyə nüfuz edərək buzu çıxarır, emal müəssisəsində maye suya çevrilir və çoxmərhələli filtrasiyadan keçirilir.</p>
                 </div></div>
             </div>
+
         </div>
     </section>
 
-    <!-- BASE ARCHITECTURE -->
     <section class="card">
         <h2>Əsas Arxitektura</h2>
         <p class="card-desc">Ekstremal mühitlər üçün nəzərdə tutulmuş modulyar yaşayış məskənləri — radiasiyadan qorunan, təzyiqə davamlı və genişləndirilə bilən.</p>
 
-        <!-- ══════════════════════════════════════════
-             3 PANEL CARD — hər biri öz səhifəsini açır
-             ──────────────────────────────────────────
-             Başlığı .panel-title içindən dəyişdirin.
-             Qısa ön baxışı .panel-preview içinə yazın.
-             Detail məzmununu JS-dəki panels[] obyektinə əlavə edin.
-        ══════════════════════════════════════════ -->
         <div class="panels-grid">
-
-            <!-- PANEL 1 -->
-            <div class="panel-card" onclick="openPanel(0)">
+            <div class="panel-card" onclick="openDetail(0)">
                 <div class="panel-number">01</div>
-                <div class="panel-title">Struktur Arxitektura</div>
-                <div class="panel-preview">Təzyiqə davamlı və genişlənə bilən yaşayış modulları.</div>
-                <div class="panel-arrow">
-                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </div>
+                <div class="panel-title" id="ptitle-0">Struktur Arxitektura</div>
+                <div class="panel-preview">Yaşayış modulları və inşaat məlumatları</div>
+                <div class="panel-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
             </div>
-
-            <!-- PANEL 2 -->
-            <div class="panel-card" onclick="openPanel(1)">
+            <div class="panel-card" onclick="openDetail(1)">
                 <div class="panel-number">02</div>
-                <div class="panel-title">Həyat Təminatı</div>
-                <div class="panel-preview">Sıfır xəta payı ilə regenerativ resurs idarəçiliyi.</div>
-                <div class="panel-arrow">
-                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </div>
+                <div class="panel-title" id="ptitle-1">Bölmə 2 Başlığı</div>
+                <div class="panel-preview">Məlumat tezliklə əlavə olunacaq</div>
+                <div class="panel-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
             </div>
-
-            <!-- PANEL 3 -->
-            <div class="panel-card" onclick="openPanel(2)">
+            <div class="panel-card" onclick="openDetail(2)">
                 <div class="panel-number">03</div>
-                <div class="panel-title">Enerji Şəbəkəsi</div>
-                <div class="panel-preview">Ekstremal mühit üçün davamlı enerji infrastrukturu.</div>
-                <div class="panel-arrow">
-                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </div>
+                <div class="panel-title" id="ptitle-2">Bölmə 3 Başlığı</div>
+                <div class="panel-preview">Məlumat tezliklə əlavə olunacaq</div>
+                <div class="panel-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
             </div>
-
         </div>
-        <!-- ══════════════════════════════════════════ -->
 
         <div class="img-wrap">
-            
+            <img src="mars_base.jpg" alt="Mars Colony Base Concept">
         </div>
     </section>
 
-    <!-- NASA LINK -->
     <section class="card">
         <h2>Daha ətraflı</h2>
         <p>Marsın tədqiqi haqqında daha çox məlumat üçün rəsmi NASA Mars portalına daxil olun.</p>
         <a href="https://mars.nasa.gov/" target="_blank" class="cta-link">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="2" y1="12" x2="22" y2="12"/>
+                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
             </svg>
             NASA Marsı kəşf et
@@ -603,119 +355,196 @@ Bundan əlavə, elektroliz prosesi vasitəsilə su molekulları parçalanaraq ə
 
     <hr class="divider">
 
-    <!-- FOOTER -->
     <footer>
         <p>Prepared by a student of<br>
         <strong style="color:rgba(240,236,232,.6);font-weight:500;">Mingachevir State University</strong></p>
         <a href="https://www.linkedin.com/in/your-profile" target="_blank" class="linkedin-link">
-            <svg viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             Connect on LinkedIn
         </a>
-        <p style="margin-top:14px;">&copy; 2026 </p>
+        <p style="margin-top:14px;">&copy; 2026 Web Programming Laboratory Assignment</p>
     </footer>
 
 </div>
-</div><!-- /#main-page -->
+</div>
 
 
-<!-- ══════════════ DETAIL PAGE ══════════════ -->
+<!-- ══════════════ DETAIL SƏHİFƏSİ ══════════════ -->
 <div id="detail-page" class="detail-page">
-    <div class="detail-inner">
+<div class="detail-inner">
 
-        <button class="detail-back" onclick="closePanel()">
-            <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-            Geri qayıt
-        </button>
+    <button class="detail-back" onclick="closeDetail()">
+        <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Geri qayıt
+    </button>
 
-        <div class="detail-header">
-            <div class="detail-label" id="detail-label">Ares-1 Mission</div>
-            <h1 class="detail-title" id="detail-title">Bölmə Başlığı</h1>
-            <p class="detail-subtitle" id="detail-subtitle">Alt başlıq</p>
-        </div>
+    <div class="detail-label" id="d-label">Ares-1 Mission</div>
+    <h1 class="detail-title" id="d-title"></h1>
+    <p class="detail-subtitle" id="d-sub"></p>
+    <hr class="detail-divider">
 
-        <hr class="detail-divider">
+    <!-- ════════════════════════════════════════════
+         8 BÖLMƏ — aşağıdakı SECTIONS_DATA massivini
+         redaktə edərək hər gün məlumat əlavə edin.
+    ════════════════════════════════════════════ -->
+    <div class="sec-list" id="sec-list"></div>
 
-        <!-- ════════════════════════════════════════
-             MƏZMUN — JS-dəki panels[].content ilə doldurulur.
-             Zamanla panels[] içinə HTML mətn əlavə edin.
-        ════════════════════════════════════════ -->
-        <div id="detail-content" class="detail-content empty">
-            <span class="empty-icon">🪐</span>
-            Bu bölmə üçün məlumat tezliklə əlavə olunacaq.
-        </div>
-        <!-- ════════════════════════════════════════ -->
-
-    </div>
+</div>
 </div>
 
 
 <script>
-    /* ══════════════════════════════════════════════════════
-       PANEL DATA
-       ──────────────────────────────────────────────────────
-       Hər panel üçün:
-         title    → səhifənin böyük başlığı
-         label    → üstdəki kiçik etiket (default: "Ares-1 Mission")
-         subtitle → italik alt başlıq
-         content  → HTML şəklində əsas məzmun
-                    (boş qaldıqda placeholder göstərilir)
-    ══════════════════════════════════════════════════════ */
-    const panels = [
+/* ════════════════════════════════════════════════════════════
+   PANEL DATA — 3 ana panel üçün başlıq və alt başlıq
+════════════════════════════════════════════════════════════ */
+const PANELS = [
+    { title:"Struktur Arxitektura",  subtitle:"Tezyiqə davamlı və genişlənə bilən yaşayış modulları." },
+    { title:"Bölmə 2 Başlığı",       subtitle:"Alt başlıq buraya yazılır." },
+    { title:"Bölmə 3 Başlığı",       subtitle:"Alt başlıq buraya yazılır." }
+];
+
+/* ════════════════════════════════════════════════════════════
+   SECTIONS_DATA — detail səhifəsindəki 8 bölmə
+   ──────────────────────────────────────────────────────────
+   HƏR PANEL ÜÇÜN AYRI massiv var: panel 0, panel 1, panel 2
+   
+   Hər bölmə obyekti:
+     title   → bölmənin başlığı (dəyişdirin)
+     content → mətn (boş qoyun → placeholder görünür)
+               Məlumat əlavə etmək üçün sadəcə burada yazın.
+════════════════════════════════════════════════════════════ */
+const SECTIONS_DATA = [
+
+    /* ── PANEL 0 (Struktur Arxitektura) ── */
+    [
         {
-            title:    "Struktur Arxitektura",
-            label:    "Ares-1 Mission",
-            subtitle: "Təzyiqə davamlı və genişlənə bilən yaşayış modulları.",
-            content:  "" // ← məlumatı buraya əlavə edin
+            title:   "Modul Dizayn",
+            content: "Tezyiqə davamlı modullar 6 metr diametrli silindrik formada hazırlanmışdır. Hər modul standart birləşdirici qovşaqları vasitəsilə digər modullarla sürətlə birləşdirilə bilər."
         },
         {
-            title:    "Həyat Təminatı",
-            label:    "Ares-1 Mission",
-            subtitle: "Sıfır xəta payı ilə regenerativ resurs idarəçiliyi.",
-            content:  "" // ← məlumatı buraya əlavə edin
+            title:   "Radiasiya Qalxanı",
+            content: "" /* ← məlumat əlavə et */
         },
         {
-            title:    "Enerji Şəbəkəsi",
-            label:    "Ares-1 Mission",
-            subtitle: "Ekstremal mühit üçün davamlı enerji infrastrukturu.",
-            content:  "" // ← məlumatı buraya əlavə edin
+            title:   "Termal İzolyasiya",
+            content: "" /* ← məlumat əlavə et */
+        },
+        {
+            title:   "Təcili Çıxış Sistemləri",
+            content: "" /* ← məlumat əlavə et */
+        },
+        {
+            title:   "Daxili Atmosfer Nəzarəti",
+            content: "" /* ← məlumat əlavə et */
+        },
+        {
+            title:   "Kommunikasiya Şəbəkəsi",
+            content: "" /* ← məlumat əlavə et */
+        },
+        {
+            title:   "Tibbi Blok",
+            content: "" /* ← məlumat əlavə et */
+        },
+        {
+            title:   "Genişlənmə Planı",
+            content: "" /* ← məlumat əlavə et */
         }
-    ];
+    ],
 
-    function openPanel(index) {
-        const p = panels[index];
-        document.getElementById('detail-label').textContent   = p.label;
-        document.getElementById('detail-title').textContent   = p.title;
-        document.getElementById('detail-subtitle').textContent = p.subtitle;
+    /* ── PANEL 1 ── */
+    [
+        { title:"Başlıq 1", content:"" },
+        { title:"Başlıq 2", content:"" },
+        { title:"Başlıq 3", content:"" },
+        { title:"Başlıq 4", content:"" },
+        { title:"Başlıq 5", content:"" },
+        { title:"Başlıq 6", content:"" },
+        { title:"Başlıq 7", content:"" },
+        { title:"Başlıq 8", content:"" }
+    ],
 
-        const contentEl = document.getElementById('detail-content');
-        if (p.content && p.content.trim() !== '') {
-            contentEl.classList.remove('empty');
-            contentEl.innerHTML = p.content;
-        } else {
-            contentEl.classList.add('empty');
-            contentEl.innerHTML = '<span class="empty-icon">🪐</span>Bu bölmə üçün məlumat tezliklə əlavə olunacaq.';
-        }
+    /* ── PANEL 2 ── */
+    [
+        { title:"Başlıq 1", content:"" },
+        { title:"Başlıq 2", content:"" },
+        { title:"Başlıq 3", content:"" },
+        { title:"Başlıq 4", content:"" },
+        { title:"Başlıq 5", content:"" },
+        { title:"Başlıq 6", content:"" },
+        { title:"Başlıq 7", content:"" },
+        { title:"Başlıq 8", content:"" }
+    ]
+];
 
-        document.getElementById('main-page').style.display   = 'none';
-        const dp = document.getElementById('detail-page');
-        dp.classList.add('active');
-        dp.scrollTop = 0;
-    }
 
-    function closePanel() {
-        document.getElementById('detail-page').classList.remove('active');
-        document.getElementById('main-page').style.display = 'block';
-    }
+/* ════ PANEL AÇ ════ */
+function openDetail(panelIdx) {
+    const p = PANELS[panelIdx];
+    document.getElementById('d-label').textContent = "Ares-1 Mission";
+    document.getElementById('d-title').textContent = p.title;
+    document.getElementById('d-sub').textContent   = p.subtitle;
 
-    /* Accordion */
-    function toggleAcc(id) {
-        const item = document.getElementById(id);
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.acc-item.open').forEach(el => el.classList.remove('open'));
-        if (!isOpen) item.classList.add('open');
-    }
+    /* Bölmələri render et */
+    const list = document.getElementById('sec-list');
+    list.innerHTML = '';
+    const secs = SECTIONS_DATA[panelIdx];
+
+    secs.forEach((sec, i) => {
+        const hasData = sec.content && sec.content.trim() !== '';
+        const num     = String(i + 1).padStart(2, '0');
+        const id      = `sec-${panelIdx}-${i}`;
+
+        const item = document.createElement('div');
+        item.className = 'sec-item' + (hasData ? ' has-data' : '');
+        item.id = id;
+
+        item.innerHTML = `
+            <button class="sec-btn" onclick="toggleSec('${id}')">
+                <span class="sec-num">${num}</span>
+                <span class="sec-name">${sec.title}</span>
+                <span class="sec-dot"></span>
+                <svg class="sec-chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="sec-body"><div class="sec-inner">
+                ${hasData
+                    ? `<div class="sec-text"><p>${sec.content}</p></div>`
+                    : `<div class="sec-empty">Məlumat tezliklə əlavə olunacaq…</div>`
+                }
+            </div></div>`;
+
+        list.appendChild(item);
+    });
+
+    document.getElementById('main-page').style.display = 'none';
+    const dp = document.getElementById('detail-page');
+    dp.classList.add('active');
+    dp.scrollTop = 0;
+}
+
+/* ════ PANEL BAĞ ════ */
+function closeDetail() {
+    document.getElementById('detail-page').classList.remove('active');
+    document.getElementById('main-page').style.display = 'block';
+}
+
+/* ════ BÖLMƏ TOGGLE ════ */
+function toggleSec(id) {
+    const item   = document.getElementById(id);
+    const isOpen = item.classList.contains('open');
+    /* hamısını bağla */
+    document.querySelectorAll('#sec-list .sec-item.open')
+            .forEach(el => el.classList.remove('open'));
+    /* yalnız bağlıydısa aç */
+    if (!isOpen) item.classList.add('open');
+}
+
+/* ════ ANA SƏHİFƏ ACCORDION ════ */
+function toggleAcc(id) {
+    const item   = document.getElementById(id);
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.acc-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+}
 </script>
 </body>
 </html>
