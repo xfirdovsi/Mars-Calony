@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪐</text></svg>">
-    <title>Mars Calony Project</title>
+    <title>Mars Colony Project</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -59,16 +59,12 @@
             position:relative;
             background:rgba(255,255,255,.04);
             backdrop-filter:blur(24px);
-            -webkit-backdrop-filter:blur(24px);
             border:1px solid rgba(255,255,255,.09);
             border-radius:28px;
             padding:52px 44px;
             text-align:center;
             margin-bottom:24px;
-            box-shadow:
-                0 2px 0 rgba(255,255,255,.07) inset,
-                0 24px 60px rgba(0,0,0,.5),
-                0 0 0 1px rgba(192,67,42,.1);
+            box-shadow: 0 2px 0 rgba(255,255,255,.07) inset, 0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(192,67,42,.1);
             overflow:hidden;
         }
         .hero::before {
@@ -103,14 +99,11 @@
         .card {
             background:rgba(255,255,255,.04);
             backdrop-filter:blur(20px);
-            -webkit-backdrop-filter:blur(20px);
             border:1px solid rgba(255,255,255,.08);
             border-radius:20px;
             padding:32px;
             margin-bottom:20px;
-            box-shadow:
-                0 1px 0 rgba(255,255,255,.06) inset,
-                0 16px 40px rgba(0,0,0,.35);
+            box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 16px 40px rgba(0,0,0,.35);
             transition:border-color .3s ease, box-shadow .3s ease;
         }
         .card:hover {
@@ -129,7 +122,7 @@
             color:var(--mars-light);
             margin:24px 0 14px;
         }
-        .card > p {
+        .card > p, .card > .card-desc {
             font-size:.9rem; line-height:1.75;
             color:rgba(240,236,232,.72); font-weight:300;
         }
@@ -137,98 +130,174 @@
 
         /* ── ACCORDION ── */
         .accordion-list { display:flex; flex-direction:column; gap:8px; }
-
         .acc-item {
             background:rgba(255,255,255,.028);
             border:1px solid rgba(255,255,255,.07);
-            border-radius:13px;
-            overflow:hidden;
-            transition:
-                background .4s ease,
-                border-color .4s ease,
-                box-shadow .4s ease;
+            border-radius:13px; overflow:hidden;
+            transition: background .4s ease, border-color .4s ease, box-shadow .4s ease;
         }
         .acc-item.open {
             background:rgba(255,255,255,.055);
             border-color:rgba(232,96,61,.28);
-            box-shadow:
-                0 0 0 1px rgba(232,96,61,.08),
-                0 8px 32px rgba(192,67,42,.18),
-                0 1px 0 rgba(255,255,255,.07) inset;
+            box-shadow: 0 0 0 1px rgba(232,96,61,.08), 0 8px 32px rgba(192,67,42,.18), 0 1px 0 rgba(255,255,255,.07) inset;
         }
-
         .acc-trigger {
-            width:100%; background:none; border:none;
-            cursor:pointer;
-            padding:14px 16px;
-            display:flex; align-items:center; gap:12px;
-            text-align:left;
-            transition:background .2s ease;
+            width:100%; background:none; border:none; cursor:pointer;
+            padding:14px 16px; display:flex; align-items:center; gap:12px;
+            text-align:left; transition:background .2s ease;
         }
         .acc-trigger:hover { background:rgba(255,255,255,.025); }
-
         .acc-dot {
-            width:6px; height:6px;
-            border-radius:50%;
-            background:var(--mars-light);
-            flex-shrink:0;
-            transition:
-                transform .4s cubic-bezier(.34,1.56,.64,1),
-                box-shadow .4s ease;
+            width:6px; height:6px; border-radius:50%;
+            background:var(--mars-light); flex-shrink:0;
+            transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s ease;
         }
-        .acc-item.open .acc-dot {
-            transform:scale(1.6);
-            box-shadow:0 0 10px rgba(232,96,61,.8);
-        }
-
+        .acc-item.open .acc-dot { transform:scale(1.6); box-shadow:0 0 10px rgba(232,96,61,.8); }
         .acc-label {
-            flex:1;
-            font-size:.875rem;
-            color:rgba(240,236,232,.7);
-            font-weight:300;
+            flex:1; font-size:.875rem; color:rgba(240,236,232,.7); font-weight:300;
             transition:color .3s ease, font-weight .3s ease;
         }
         .acc-item.open .acc-label { color:#f5ede8; font-weight:400; }
-
         .acc-chevron {
-            width:15px; height:15px;
-            stroke:rgba(240,236,232,.35);
-            fill:none;
-            stroke-width:2.5;
-            stroke-linecap:round;
-            stroke-linejoin:round;
-            flex-shrink:0;
-            transition:
-                transform .45s cubic-bezier(.34,1.2,.64,1),
-                stroke .3s ease;
+            width:15px; height:15px; stroke:rgba(240,236,232,.35); fill:none;
+            stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0;
+            transition: transform .45s cubic-bezier(.34,1.2,.64,1), stroke .3s ease;
         }
-        .acc-item.open .acc-chevron {
-            transform:rotate(180deg);
-            stroke:var(--mars-light);
-        }
-
-        /* Smooth height via CSS grid trick */
+        .acc-item.open .acc-chevron { transform:rotate(180deg); stroke:var(--mars-light); }
         .acc-body {
-            display:grid;
-            grid-template-rows:0fr;
+            display:grid; grid-template-rows:0fr;
             transition:grid-template-rows .45s cubic-bezier(.4,0,.2,1);
         }
         .acc-item.open .acc-body { grid-template-rows:1fr; }
         .acc-inner { overflow:hidden; }
-
         .acc-text {
             padding:14px 20px 20px 34px;
-            font-size:.84rem;
-            line-height:1.9;
-            color:rgba(240,236,232,.58);
-            font-weight:300;
+            font-size:.84rem; line-height:1.9;
+            color:rgba(240,236,232,.58); font-weight:300;
             border-top:1px solid rgba(255,255,255,.06);
         }
+
+        /* ══════════════════════════════════════════
+           3 PANEL CARDS — şəkildən yuxarı
+        ══════════════════════════════════════════ */
+        .panels-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin: 22px 0 20px;
+        }
+
+        .panel-card {
+            position: relative;
+            border-radius: 18px;
+            padding: 24px 18px 22px;
+            cursor: pointer;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,.09);
+            transition:
+                transform .35s cubic-bezier(.34,1.4,.64,1),
+                box-shadow .35s ease,
+                border-color .3s ease;
+            /* Dizayna uyğun tünd şəffaf fon */
+            background: rgba(255,255,255,.045);
+            backdrop-filter: blur(18px);
+        }
+
+        /* Üst parıltı xətti */
+        .panel-card::before {
+            content: '';
+            position: absolute; top: 0; left: 16px; right: 16px; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+            transition: opacity .3s ease;
+        }
+
+        /* Mars qızılı alt glow */
+        .panel-card::after {
+            content: '';
+            position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%);
+            width: 80%; height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(192,67,42,.35) 0%, transparent 70%);
+            transition: opacity .4s ease, bottom .35s ease;
+            opacity: 0;
+        }
+
+        /* Hover — yumşaq titrəyiş effekti */
+        .panel-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(232,96,61,.35);
+            box-shadow:
+                0 0 0 1px rgba(232,96,61,.12),
+                0 16px 40px rgba(192,67,42,.25),
+                0 2px 0 rgba(255,255,255,.1) inset;
+        }
+        .panel-card:hover::after {
+            opacity: 1;
+            bottom: -10px;
+        }
+
+        /* Klik animasiyası */
+        .panel-card:active {
+            transform: translateY(-2px) scale(1.005);
+        }
+
+        /* Panel nömrəsi — dekorativ */
+        .panel-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            color: rgba(240,160,75,.2);
+            line-height: 1;
+            margin-bottom: 12px;
+            letter-spacing: -.02em;
+        }
+
+        .panel-title {
+            font-size: .62rem;
+            font-weight: 500;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--mars-light);
+            margin-bottom: 10px;
+        }
+
+        .panel-preview {
+            font-size: .78rem;
+            line-height: 1.7;
+            color: rgba(240,236,232,.38);
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        /* "Oxu" arrow */
+        .panel-arrow {
+            position: absolute; bottom: 16px; right: 16px;
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            background: rgba(192,67,42,.2);
+            border: 1px solid rgba(232,96,61,.25);
+            display: flex; align-items: center; justify-content: center;
+            transition: background .3s ease, transform .3s cubic-bezier(.34,1.4,.64,1);
+        }
+        .panel-arrow svg {
+            width: 11px; height: 11px;
+            stroke: rgba(232,96,61,.8); fill: none;
+            stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+            transition: stroke .3s ease;
+        }
+        .panel-card:hover .panel-arrow {
+            background: rgba(192,67,42,.45);
+            transform: scale(1.15);
+        }
+        .panel-card:hover .panel-arrow svg {
+            stroke: #fff;
+        }
+        /* ══════════════════════════════════════════ */
 
         /* ── IMAGE ── */
         .img-wrap {
             border-radius:14px; overflow:hidden;
-            margin:20px 0 0;
+            margin: 0;
             border:1px solid rgba(255,255,255,.07);
         }
         .img-wrap img { width:100%; height:auto; display:block; }
@@ -238,8 +307,7 @@
             display:inline-flex; align-items:center; gap:8px;
             margin-top:18px; padding:11px 22px;
             background:linear-gradient(135deg,var(--mars) 0%,var(--mars-light) 100%);
-            color:#fff; text-decoration:none;
-            border-radius:100px;
+            color:#fff; text-decoration:none; border-radius:100px;
             font-size:.82rem; font-weight:500; letter-spacing:.04em;
             box-shadow:0 4px 20px rgba(192,67,42,.4);
             transition:box-shadow .25s ease, transform .2s ease;
@@ -253,39 +321,153 @@
         footer {
             background:rgba(255,255,255,.03);
             backdrop-filter:blur(20px);
-            -webkit-backdrop-filter:blur(20px);
             border:1px solid rgba(255,255,255,.07);
-            border-radius:16px;
-            padding:24px 28px;
-            text-align:center;
+            border-radius:16px; padding:24px 28px; text-align:center;
         }
         footer p { font-size:.78rem; color:rgba(240,236,232,.35); font-weight:300; line-height:1.9; }
-
         .linkedin-link {
             display:inline-flex; align-items:center; gap:6px;
-            color:rgba(240,236,232,.65);
-            text-decoration:none;
+            color:rgba(240,236,232,.65); text-decoration:none;
             font-size:.8rem; font-weight:400;
             padding:5px 14px;
-            border:1px solid rgba(255,255,255,.1);
-            border-radius:100px;
-            transition:all .25s ease;
-            margin-top:8px;
+            border:1px solid rgba(255,255,255,.1); border-radius:100px;
+            transition:all .25s ease; margin-top:8px;
         }
-        .linkedin-link:hover {
-            color:#fff;
-            border-color:rgba(255,255,255,.25);
-            background:rgba(255,255,255,.06);
-        }
+        .linkedin-link:hover { color:#fff; border-color:rgba(255,255,255,.25); background:rgba(255,255,255,.06); }
         .linkedin-link svg { width:13px; height:13px; fill:currentColor; }
 
-        @media(max-width:480px){
-            .hero{padding:36px 24px;}
-            .card{padding:24px 20px;}
+        /* ══════════════════════════════════════════
+           DETAIL PAGE — panel tıklandıqda açılır
+        ══════════════════════════════════════════ */
+        .detail-page {
+            display: none;
+            position: fixed; inset: 0; z-index: 100;
+            background: #0d0a09;
+            overflow-y: auto;
+            animation: pageIn .4s cubic-bezier(.4,0,.2,1);
+        }
+        .detail-page.active { display: block; }
+
+        @keyframes pageIn {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Stars bg on detail page */
+        .detail-page::before {
+            content:'';
+            position:fixed; inset:0;
+            background:
+                radial-gradient(ellipse 70% 40% at 70% -5%, rgba(192,67,42,.2) 0%, transparent 55%),
+                radial-gradient(ellipse 100% 80% at 50% 50%, #120e0c 0%, #0d0a09 100%);
+            pointer-events:none;
+        }
+        .detail-page::after {
+            content:'';
+            position:fixed; inset:0;
+            background-image:
+                radial-gradient(1px 1px at 22% 8%,  rgba(255,255,255,.4) 0%, transparent 100%),
+                radial-gradient(1px 1px at 58% 15%, rgba(255,255,255,.3) 0%, transparent 100%),
+                radial-gradient(1px 1px at 80% 4%,  rgba(255,255,255,.35) 0%, transparent 100%),
+                radial-gradient(1px 1px at 10% 28%, rgba(255,255,255,.2) 0%, transparent 100%),
+                radial-gradient(1px 1px at 93% 35%, rgba(255,255,255,.25) 0%, transparent 100%);
+            pointer-events:none;
+        }
+
+        .detail-inner {
+            position: relative; z-index: 1;
+            max-width: 680px; margin: 0 auto;
+            padding: 40px 24px 60px;
+        }
+
+        .detail-back {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: none; border: none; cursor: pointer;
+            color: rgba(240,236,232,.5);
+            font-family: 'DM Sans', sans-serif;
+            font-size: .8rem; font-weight: 400;
+            letter-spacing: .04em;
+            padding: 8px 0;
+            margin-bottom: 32px;
+            transition: color .25s ease;
+        }
+        .detail-back:hover { color: var(--text); }
+        .detail-back svg {
+            width: 14px; height: 14px;
+            stroke: currentColor; fill: none;
+            stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+        }
+
+        .detail-header {
+            margin-bottom: 32px;
+        }
+        .detail-label {
+            display: inline-block;
+            font-size: .62rem; font-weight: 500;
+            letter-spacing: .16em; text-transform: uppercase;
+            color: var(--amber);
+            background: rgba(240,160,75,.1);
+            border: 1px solid rgba(240,160,75,.2);
+            border-radius: 100px;
+            padding: 4px 12px; margin-bottom: 16px;
+        }
+        .detail-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 6vw, 2.6rem);
+            font-weight: 300; line-height: 1.15;
+            color: #f5ede8; letter-spacing: -.02em;
+            margin-bottom: 10px;
+        }
+        .detail-subtitle {
+            font-size: .88rem;
+            color: rgba(240,236,232,.45);
+            font-weight: 300; font-style: italic;
+        }
+
+        .detail-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,.07);
+            margin: 28px 0;
+        }
+
+        /* Content area — bura data əlavə olunacaq */
+        .detail-content {
+            font-size: .9rem;
+            line-height: 1.85;
+            color: rgba(240,236,232,.68);
+            font-weight: 300;
+        }
+        .detail-content.empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 220px;
+            text-align: center;
+            color: rgba(240,236,232,.2);
+            font-style: italic;
+            border: 1px dashed rgba(255,255,255,.07);
+            border-radius: 16px;
+            gap: 12px;
+        }
+        .detail-content.empty .empty-icon {
+            font-size: 2rem;
+            opacity: .35;
+        }
+        /* ══════════════════════════════════════════ */
+
+        @media(max-width:520px){
+            .hero { padding:36px 24px; }
+            .card { padding:24px 20px; }
+            .panels-grid { grid-template-columns: 1fr; }
+            .panel-card { padding: 20px 18px 20px; }
         }
     </style>
 </head>
 <body>
+
+<!-- ══════════════ MAIN PAGE ══════════════ -->
+<div id="main-page">
 <div class="wrapper">
 
     <!-- HERO -->
@@ -299,74 +481,107 @@
     <section class="card">
         <h2>Missiyanın İcmalı</h2>
         <p>
-            <span class="highlight">Ares-1 Mission</span> Marsda insanların davamlı varlığını təmin etməyi hədəfləyir. 
+            <span class="highlight">Ares-1 Mission</span> Marsda insanların davamlı varlığını təmin etməyi hədəfləyir.
             Bizim əsas məqsədimiz Yerdən asılı olmayaraq həyatı dəstəkləyə bilən <span class="highlight">özünü təmin edən ekosistem</span> qurmaqdır.
         </p>
 
         <h3>HƏYAT ÜÇÜN ZƏRURİ TƏMİNAT</h3>
 
         <div class="accordion-list">
-
-            <!-- 1. MOXIE -->
             <div class="acc-item" id="acc-1">
                 <button class="acc-trigger" onclick="toggleAcc('acc-1')">
                     <span class="acc-dot"></span>
                     <span class="acc-label">Oksigen İstehsal Sistemi (MOXIE)</span>
                     <svg class="acc-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
-                <div class="acc-body">
-                    <div class="acc-inner">
-                        <p class="acc-text">
-                            "Ares-1" missiyasının ən strateji texnologiyalarından biri olan MOXIE, qırmızı planetdə insan həyatının davamlılığını təmin edən əsas amildir. Bu sistemin əsas vəzifəsi Marsın yerli resurslarından istifadə edərək birbaşa orada oksigen istehsal etməkdir. Marsın atmosferi Yerdən fərqli olaraq təxminən 96% karbon qazından ibarətdir və MOXIE bu bol xammal ehtiyatını udaraq elektrokimyəvi proses vasitəsilə onu tənəffüs üçün yararlı oksigen molekullarına çevirir. Hazırda hər bir MOXIE bölməsi optimal iş şəraitində saatda 10 qramadək oksigen istehsal etmək gücündədir.
+                <div class="acc-body"><div class="acc-inner">
+                    <p class="acc-text">
+                        "Ares-1" missiyasının ən strateji texnologiyalarından biri olan MOXIE, qırmızı planetdə insan həyatının davamlılığını təmin edən əsas amildir. Bu sistemin əsas vəzifəsi Marsın yerli resurslarından istifadə edərək birbaşa orada oksigen istehsal etməkdir. Marsın atmosferi Yerdən fərqli olaraq təxminən 96% karbon qazından ibarətdir və MOXIE bu bol xammal ehtiyatını udaraq elektrokimyəvi proses vasitəsilə onu tənəffüs üçün yararlı oksigen molekullarına çevirir. Hazırda hər bir MOXIE bölməsi optimal iş şəraitində saatda 10 qramadək oksigen istehsal etmək gücündədir.
 
 Sistem Marsın sərt mühitində, təxminən 800 °C kimi ekstremal yüksək temperaturlarda fəaliyyət göstərdiyi üçün onun istehsalında xüsusi istiyədavamlı və möhkəm materiallardan istifadə olunmuşdur. Bu texnologiya ilk dəfə NASA-nın "Perseverance" roverində real Mars şəraitində uğurla sınaqdan keçirilmiş və öz effektivliyini tam sübut etmişdir. Oksigen təkcə kolonistlərin tənəffüsü üçün deyil, həm də raket yanacağının əsas tərkib hissəsi kimi həyati önəm daşıyır. Yerli oksigen istehsalı sayəsində geri qayıdış missiyaları üçün lazım olan yanacaq Marsın özündə hazırlana biləcək ki, bu da koloniyanın Yerdən gələn təchizat asılılığını fundamental şəkildə azaldır. Gələcək mərhələlərdə paralel işləyən MOXIE şəbəkələri sayəsində daha böyük heyətlərin bütün oksigen tələbatı tam şəkildə qarşılanacaq və Marsda uzunmüddətli məskunlaşma həqiqi mənada mümkün olacaqdır.
-                        </p>
-                    </div>
-                </div>
+                    </p>
+                </div></div>
             </div>
 
-            <!-- 2. Solar Array -->
             <div class="acc-item" id="acc-2">
                 <button class="acc-trigger" onclick="toggleAcc('acc-2')">
                     <span class="acc-dot"></span>
                     <span class="acc-label">Təkmilləşdirilmiş Günəş Panelləri Şəbəkəsi</span>
                     <svg class="acc-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
-                <div class="acc-body">
-                    <div class="acc-inner">
-                        <p class="acc-text">
-                          Mars Yer kürəsinə çatan günəş enerjisinin təxminən 43%-ni qəbul edir, buna görə də koloniyanın sağ qalması üçün yüksək səmərəli fotovoltaik panellərin istifadəsi mütləq ehtiyacdır. Bu məqsədlə hazırlanan Təkmilləşdirilmiş Günəş Panelləri Şəbəkəsi, standart kommersiya panelləri ilə müqayisədə işığı daha geniş spektrdə enerjiyə çevirə bilən çoxkeçidli hüceyrələrdən istifadə edir. Enerji qəbulunu maksimuma çatdırmaq üçün hər bir panel massivi 24,6 saatlıq Mars günü boyunca günəşi izləyən motorlu izləmə sistemləri üzərinə quraşdırılmışdır. Marsda günəş enerjisi üçün əsas təhlükə olan toz fırtınaları şiddətli vaxtlarda panellərin məhsuldarlığını 90%-ə qədər azalda bilsin də, buna qarşı hər bir panel səthi insan müdaxiləsi olmadan narın toz hissəciklərini davamlı olaraq itələyən elektrostatik özünü təmizləmə örtüyü ilə təchiz edilmişdir.
+                <div class="acc-body"><div class="acc-inner">
+                    <p class="acc-text">
+                        Mars Yer kürəsinə çatan günəş enerjisinin təxminən 43%-ni qəbul edir, buna görə də koloniyanın sağ qalması üçün yüksək səmərəli fotovoltaik panellərin istifadəsi mütləq ehtiyacdır. Bu məqsədlə hazırlanan Təkmilləşdirilmiş Günəş Panelləri Şəbəkəsi, standart kommersiya panelləri ilə müqayisədə işığı daha geniş spektrdə enerjiyə çevirə bilən çoxkeçidli hüceyrələrdən istifadə edir. Enerji qəbulunu maksimuma çatdırmaq üçün hər bir panel massivi 24,6 saatlıq Mars günü boyunca günəşi izləyən motorlu izləmə sistemləri üzərinə quraşdırılmışdır. Marsda günəş enerjisi üçün əsas təhlükə olan toz fırtınaları şiddətli vaxtlarda panellərin məhsuldarlığını 90%-ə qədər azalda bilsin də, buna qarşı hər bir panel səthi insan müdaxiləsi olmadan narın toz hissəciklərini davamlı olaraq itələyən elektrostatik özünü təmizləmə örtüyü ilə təchiz edilmişdir.
 
 Toplanan enerji, fırtına səbəbindən günəş işığı azaldığı təqdirdə koloniyanı 72 saata qədər enerji ilə təmin edə bilən yüksək sıxlıqlı litium-kükürd batareya banklarında saxlanılır. Şəbəkə tamamilə modul quruluşa malikdir, yəni koloniya əhalisi artdıqca və enerji tələbatı yüksəldikcə yeni panellər tədricən sistemə əlavə oluna bilir. Ağıllı paylama şəbəkəsi istehlakı real vaxt rejimində izləyir və enerji çatışmazlığı zamanı resursları avtomatik olaraq kritik həyat təminatı sistemlərinə yönəldir. Soyuq Mars gecələrində isə yeraltı termal saxlama qurğuları günəş şəbəkəsini tamamlayaraq toplanmış enerjini ehtiyaca uyğun olaraq elektrik enerjisinə çevirir və sərbəst buraxır. Bütün şəbəkə 25 illik istismar müddəti üçün layihələndirilmişdir və robotik texniki xidmət bölmələri müntəzəm yoxlamaları və təmir işlərini tamamilə avtonom şəkildə həyata keçirir.
-                        </p>
-                    </div>
-                </div>
+                    </p>
+                </div></div>
             </div>
 
-            <!-- 3. Ice Mining -->
             <div class="acc-item" id="acc-3">
                 <button class="acc-trigger" onclick="toggleAcc('acc-3')">
                     <span class="acc-dot"></span>
-                    <span class="acc-label">Səthaltı Buz Mədənçiliyi &amp; Suyun Çıxarılması </span>
+                    <span class="acc-label">Səthaltı Buz Mədənçiliyi &amp; Suyun Çıxarılması</span>
                     <svg class="acc-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
-                <div class="acc-body">
-                    <div class="acc-inner">
-                        <p class="acc-text">
-Marsın səthi altında, xüsusilə "Ares-1" eniş sahəsi üçün seçilmiş orta enlik regionlarında nəhəng su buzu ehtiyatları gizlənir. Səthaltı buz mədənçiliyi prosesi donmuş su yataqlarına çatmaq üçün Mars reqoliti (üst təbəqəsi) altında 10 metrədək dərinliyə nüfuz edən avtonom qazma qurğularının tətbiqini nəzərdə tutur. Çıxarılan buz mərkəzi emal müəssisəsinə daşınır və burada təzyiqli, möhürlənmiş konteynerlər daxilində qızdırılaraq maye suya çevrilir. Daha sonra bu su perchloratları, ağır metalları və potensial bioloji çirkləndiriciləri kənarlaşdıran çoxmərhələli filtrasiya sistemindən keçir. Təmizlənmiş su üç əsas istiqamət üzrə paylanır: içməli və gigiyenik təminat, yaşayış kompleksindəki istixanalar üçün kənd təsərrüfatı suvarılması və hidrogen yanacağı istehsalı.
+                <div class="acc-body"><div class="acc-inner">
+                    <p class="acc-text">
+                        Marsın səthi altında, xüsusilə "Ares-1" eniş sahəsi üçün seçilmiş orta enlik regionlarında nəhəng su buzu ehtiyatları gizlənir. Səthaltı buz mədənçiliyi prosesi donmuş su yataqlarına çatmaq üçün Mars reqoliti (üst təbəqəsi) altında 10 metrədək dərinliyə nüfuz edən avtonom qazma qurğularının tətbiqini nəzərdə tutur. Çıxarılan buz mərkəzi emal müəssisəsinə daşınır və burada təzyiqli, möhürlənmiş konteynerlər daxilində qızdırılaraq maye suya çevrilir. Daha sonra bu su perchloratları, ağır metalları və potensial bioloji çirkləndiriciləri kənarlaşdıran çoxmərhələli filtrasiya sistemindən keçir. Təmizlənmiş su üç əsas istiqamət üzrə paylanır: içməli və gigiyenik təminat, yaşayış kompleksindəki istixanalar üçün kənd təsərrüfatı suvarılması və hidrogen yanacağı istehsalı.
 
-Bundan əlavə, elektroliz prosesi vasitəsilə su molekulları parçalanaraq əlavə məhsul kimi oksigen istehsal olunur ki, bu da koloniyanın pik tələbat dövrlərində MOXIE sistemini tamamlayır. Bütün qazma qurğuları tamamilə robotlaşdırılmışdır və mərkəzi yaşayış idarəetmə otağından mühəndislər tərəfindən uzaqdan izlənilərək fasiləsiz fəaliyyət göstərir. Su ehtiyatları, temperaturun −80 °C-yə qədər düşə bildiyi Mars gecələrində donmanın qarşısını almaq üçün izolyasiya edilmiş yeraltı çənlərdə saxlanılır. Mars orbitindəki buz xəritəçəkmə peykləri qazma əməliyyatlarını ən zəngin yataqlara yönəltmək üçün davamlı olaraq yenilənən geoloji məlumatlar təqdim edir. Bu qapalı dövriyyəli su idarəetmə sistemi istənilən vaxt koloniya daxilində istifadə olunan suyun 98%-dən çoxunu təkrar emal edərək tullantıların sıfıra yaxın olmasını təmin edir.                        </p>
-                    </div>
-                </div>
+Bundan əlavə, elektroliz prosesi vasitəsilə su molekulları parçalanaraq əlavə məhsul kimi oksigen istehsal olunur ki, bu da koloniyanın pik tələbat dövrlərində MOXIE sistemini tamamlayır. Bütün qazma qurğuları tamamilə robotlaşdırılmışdır və mərkəzi yaşayış idarəetmə otağından mühəndislər tərəfindən uzaqdan izlənilərək fasiləsiz fəaliyyət göstərir. Su ehtiyatları, temperaturun −80 °C-yə qədər düşə bildiyi Mars gecələrində donmanın qarşısını almaq üçün izolyasiya edilmiş yeraltı çənlərdə saxlanılır. Mars orbitindəki buz xəritəçəkmə peykləri qazma əməliyyatlarını ən zəngin yataqlara yönəltmək üçün davamlı olaraq yenilənən geoloji məlumatlar təqdim edir. Bu qapalı dövriyyəli su idarəetmə sistemi istənilən vaxt koloniya daxilində istifadə olunan suyun 98%-dən çoxunu təkrar emal edərək tullantıların sıfıra yaxın olmasını təmin edir.
+                    </p>
+                </div></div>
             </div>
-
         </div>
     </section>
 
     <!-- BASE ARCHITECTURE -->
     <section class="card">
         <h2>Əsas Arxitektura</h2>
-        <p>Ekstremal mühitlər üçün nəzərdə tutulmuş modulyar yaşayış məskənləri — radiasiyadan qorunan, təzyiqə davamlı və genişləndirilə bilən.</p>
+        <p class="card-desc">Ekstremal mühitlər üçün nəzərdə tutulmuş modulyar yaşayış məskənləri — radiasiyadan qorunan, təzyiqə davamlı və genişləndirilə bilən.</p>
+
+        <!-- ══════════════════════════════════════════
+             3 PANEL CARD — hər biri öz səhifəsini açır
+             ──────────────────────────────────────────
+             Başlığı .panel-title içindən dəyişdirin.
+             Qısa ön baxışı .panel-preview içinə yazın.
+             Detail məzmununu JS-dəki panels[] obyektinə əlavə edin.
+        ══════════════════════════════════════════ -->
+        <div class="panels-grid">
+
+            <!-- PANEL 1 -->
+            <div class="panel-card" onclick="openPanel(0)">
+                <div class="panel-number">01</div>
+                <div class="panel-title">Bölmə 1 Başlığı</div>
+                <div class="panel-preview">Məlumat tezliklə əlavə olunacaq…</div>
+                <div class="panel-arrow">
+                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+            </div>
+
+            <!-- PANEL 2 -->
+            <div class="panel-card" onclick="openPanel(1)">
+                <div class="panel-number">02</div>
+                <div class="panel-title">Bölmə 2 Başlığı</div>
+                <div class="panel-preview">Məlumat tezliklə əlavə olunacaq…</div>
+                <div class="panel-arrow">
+                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+            </div>
+
+            <!-- PANEL 3 -->
+            <div class="panel-card" onclick="openPanel(2)">
+                <div class="panel-number">03</div>
+                <div class="panel-title">Bölmə 3 Başlığı</div>
+                <div class="panel-preview">Məlumat tezliklə əlavə olunacaq…</div>
+                <div class="panel-arrow">
+                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+            </div>
+
+        </div>
+        <!-- ══════════════════════════════════════════ -->
+
         <div class="img-wrap">
             <img src="mars_base.jpg" alt="Mars Colony Base Concept">
         </div>
@@ -402,14 +617,103 @@ Bundan əlavə, elektroliz prosesi vasitəsilə su molekulları parçalanaraq ə
     </footer>
 
 </div>
+</div><!-- /#main-page -->
+
+
+<!-- ══════════════ DETAIL PAGE ══════════════ -->
+<div id="detail-page" class="detail-page">
+    <div class="detail-inner">
+
+        <button class="detail-back" onclick="closePanel()">
+            <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Geri qayıt
+        </button>
+
+        <div class="detail-header">
+            <div class="detail-label" id="detail-label">Ares-1 Mission</div>
+            <h1 class="detail-title" id="detail-title">Bölmə Başlığı</h1>
+            <p class="detail-subtitle" id="detail-subtitle">Alt başlıq</p>
+        </div>
+
+        <hr class="detail-divider">
+
+        <!-- ════════════════════════════════════════
+             MƏZMUN — JS-dəki panels[].content ilə doldurulur.
+             Zamanla panels[] içinə HTML mətn əlavə edin.
+        ════════════════════════════════════════ -->
+        <div id="detail-content" class="detail-content empty">
+            <span class="empty-icon">🪐</span>
+            Bu bölmə üçün məlumat tezliklə əlavə olunacaq.
+        </div>
+        <!-- ════════════════════════════════════════ -->
+
+    </div>
+</div>
+
 
 <script>
+    /* ══════════════════════════════════════════════════════
+       PANEL DATA
+       ──────────────────────────────────────────────────────
+       Hər panel üçün:
+         title    → səhifənin böyük başlığı
+         label    → üstdəki kiçik etiket (default: "Ares-1 Mission")
+         subtitle → italik alt başlıq
+         content  → HTML şəklində əsas məzmun
+                    (boş qaldıqda placeholder göstərilir)
+    ══════════════════════════════════════════════════════ */
+    const panels = [
+        {
+            title:    "Bölmə 1 Başlığı",
+            label:    "Ares-1 Mission",
+            subtitle: "Alt başlıq buraya yazılır",
+            content:  "" // ← məlumatı buraya əlavə edin
+        },
+        {
+            title:    "Bölmə 2 Başlığı",
+            label:    "Ares-1 Mission",
+            subtitle: "Alt başlıq buraya yazılır",
+            content:  "" // ← məlumatı buraya əlavə edin
+        },
+        {
+            title:    "Bölmə 3 Başlığı",
+            label:    "Ares-1 Mission",
+            subtitle: "Alt başlıq buraya yazılır",
+            content:  "" // ← məlumatı buraya əlavə edin
+        }
+    ];
+
+    function openPanel(index) {
+        const p = panels[index];
+        document.getElementById('detail-label').textContent   = p.label;
+        document.getElementById('detail-title').textContent   = p.title;
+        document.getElementById('detail-subtitle').textContent = p.subtitle;
+
+        const contentEl = document.getElementById('detail-content');
+        if (p.content && p.content.trim() !== '') {
+            contentEl.classList.remove('empty');
+            contentEl.innerHTML = p.content;
+        } else {
+            contentEl.classList.add('empty');
+            contentEl.innerHTML = '<span class="empty-icon">🪐</span>Bu bölmə üçün məlumat tezliklə əlavə olunacaq.';
+        }
+
+        document.getElementById('main-page').style.display   = 'none';
+        const dp = document.getElementById('detail-page');
+        dp.classList.add('active');
+        dp.scrollTop = 0;
+    }
+
+    function closePanel() {
+        document.getElementById('detail-page').classList.remove('active');
+        document.getElementById('main-page').style.display = 'block';
+    }
+
+    /* Accordion */
     function toggleAcc(id) {
         const item = document.getElementById(id);
         const isOpen = item.classList.contains('open');
-        // Close all open items
         document.querySelectorAll('.acc-item.open').forEach(el => el.classList.remove('open'));
-        // Open clicked one if it was closed
         if (!isOpen) item.classList.add('open');
     }
 </script>
