@@ -3,92 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mars Colony Project | Lab 1</title>
+    <title>Mars Colony | Glassmorphism Edition</title>
     
     <style>
-        /* Minimalist and Mobile-friendly Design */
+        /* Arxa fon üçün kosmos mənzərəsi */
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: url('https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=2000') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #ffffff;
+        }
+
+        /* Glassmorphism Paneli */
+        .glass-container {
+            background: rgba(255, 255, 255, 0.1); /* Yarımşəffaf ağ fon */
+            backdrop-filter: blur(15px);        /* Şüşə effekti verən bulandırma */
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2); /* İncə şüşə kənarı */
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 550px;
+            width: 90%;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            margin: 20px;
+        }
+
+        h1 {
+            color: #ffccbc;
+            font-size: 2.2em;
+            margin-top: 0;
+        }
+
+        h2, h3 {
+            color: #ffab91;
+        }
+
+        p {
+            font-size: 1.1em;
             line-height: 1.6;
-            color: #2c3e50;
-            max-width: 650px;
-            margin: 0 auto;
-            padding: 25px;
-            background-color: #ffffff;
         }
 
-        h1, h2, h3 {
-            color: #e67e22; /* Mars-themed Orange */
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
+        ul {
+            padding-left: 20px;
         }
 
-        .highlight {
-            background-color: #fff3e0;
-            padding: 2px 5px;
-            font-weight: bold;
+        li {
+            margin-bottom: 10px;
         }
 
         img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
+            width: 100%;
+            border-radius: 15px;
             margin: 20px 0;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .cta-link {
-            display: inline-block;
-            background-color: #e67e22;
-            color: white !important;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-top: 10px;
-        }
-
-        .cta-link:hover {
-            background-color: #d35400;
-        }
-
-        footer {
-            margin-top: 40px;
-            font-size: 0.85em;
-            color: #95a5a6;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Mars Colony: The Red Frontier</h1>
-    <p><i>Welcome to the official portal of the first human settlement on Mars.</i></p>
-    
-    <h2>Mission Overview</h2>
-    <p>
-        The <span class="highlight">Ares-1 Mission</span> aims to establish a sustainable human presence on Mars. 
-        Our primary goal is to build a <b>self-sufficient ecosystem</b> that can support life <i>independently</i> from Earth.
-    </p>
-
-    <h3>Essential Life Support</h3>
-    <ul>
-        <li>Oxygen Generation System (MOXIE)</li>
-        <li>Advanced Solar Array Grid</li>
-        <li>Subsurface Ice Mining & Water Extraction</li>
-    </ul>
-
-    <h3>Base Architecture</h3>
-    <img src="mars_base.jpg" alt="Mars Colony Base Concept">
-    
-    <p>For more information on Mars exploration, visit the official NASA website:</p>
-    <a href="https://mars.nasa.gov/" target="_blank" class="cta-link">Explore NASA Mars</a>
-
-    <hr>
-
-    <footer>
-        <p>Prepared by: <b>Student of Mingachevir State University</b></p>
-        <p>&copy; 2026 Web Programming Laboratory Assignment</p>
-    </footer>
-
-</body>
-</html>
+            border: 1px solid rgba(255, 255, 255,
